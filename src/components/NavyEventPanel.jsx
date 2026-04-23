@@ -12,6 +12,10 @@ import CapePeninsulaMapSvg from './CapePeninsulaMapSvg';
 //   3. Body: SVG map on the left, 2x2 course grid on the right
 //   4. Footer row: prize (wider) + 19th hole (narrower)
 //   5. NO CTA button inside this card — action lives on the twin framed cards above.
+//
+// Padding / row rhythm mirrors CalendarEventCard so the two cards read as
+// visually symmetric: `p-7 sm:p-8 lg:p-10`, `grid-rows-[auto_1fr_auto]` so
+// the footer row pins to the bottom and the two cards bottom-align on desktop.
 export default function NavyEventPanel({ event }) {
   const { ref, style, onMouseMove, onMouseLeave } = useTilt(2);
 
@@ -21,11 +25,11 @@ export default function NavyEventPanel({ event }) {
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative bg-navy-800 text-cream-50 p-6 sm:p-7 lg:p-8 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)] rounded-lg overflow-hidden"
+      className="relative bg-navy-800 text-cream-50 p-7 sm:p-8 lg:p-10 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)] rounded-lg overflow-hidden h-full min-h-[640px] grid grid-rows-[auto_1fr_auto] gap-6 sm:gap-7"
     >
-      <div className="grain opacity-40" />
+      <div className="grain opacity-40 pointer-events-none absolute inset-0" />
 
-      {/* ── 1. Single-line gold header ─────────────────────────────── */}
+      {/* ── 1. Header row ──────────────────────────────────────────── */}
       <div className="relative text-center">
         <h3
           className="font-display text-gold-400 tracking-[0.12em] leading-tight text-balance"
@@ -40,7 +44,7 @@ export default function NavyEventPanel({ event }) {
           <span className="whitespace-nowrap">{event.location.toUpperCase()}</span>
         </h3>
 
-        {/* ── 2. Thin gold hairline rule under header ──────────────── */}
+        {/* Thin gold hairline rule under header */}
         <div className="mt-3 sm:mt-4 flex justify-center">
           <span
             aria-hidden
@@ -50,9 +54,9 @@ export default function NavyEventPanel({ event }) {
         </div>
       </div>
 
-      {/* ── 3. Body: 2-column — SVG map | 2x2 course grid ──────────── */}
-      <div className="relative mt-6 sm:mt-7 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-start">
-        {/* Left: SVG peninsula map (lightweight, editorial) */}
+      {/* ── 2. Body: SVG map + 2x2 course grid (flex-grows to fill) ── */}
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-start">
+        {/* Left: SVG peninsula map */}
         <div className="flex items-start justify-center md:justify-start">
           <CapePeninsulaMapSvg className="w-full max-w-[260px]" />
         </div>
@@ -78,9 +82,9 @@ export default function NavyEventPanel({ event }) {
         </div>
       </div>
 
-      {/* ── 4. Footer row: Prize (wider) + 19th Hole (narrower) ─────── */}
-      <div className="relative mt-6 sm:mt-7 grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] gap-4">
-        {/* Prize in focus — darker navy card with gold hairline */}
+      {/* ── 3. Footer row (pinned to bottom) ────────────────────────── */}
+      <div className="relative grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] gap-4">
+        {/* Prize */}
         <div className="bg-navy-900 border border-gold-500/40 p-4 sm:p-5 text-center rounded-md">
           <p className="font-display text-gold-400 text-[10.5px] tracking-[0.28em] uppercase">
             {event.prizeInFocus.headline}:
@@ -90,7 +94,7 @@ export default function NavyEventPanel({ event }) {
           </p>
         </div>
 
-        {/* 19th Hole — solid gold card */}
+        {/* 19th Hole */}
         <div className="bg-gold-500 text-navy-900 p-4 sm:p-5 text-center rounded-md">
           <p className="font-display text-navy-900 text-[10.5px] tracking-[0.28em] uppercase">
             {event.nineteenthHole.headline}:
@@ -100,8 +104,6 @@ export default function NavyEventPanel({ event }) {
           </p>
         </div>
       </div>
-
-      {/* ── 5. No CTA button — matches mockup. ──────────────────────── */}
     </div>
   );
 }

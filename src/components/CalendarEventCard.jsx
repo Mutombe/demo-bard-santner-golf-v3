@@ -59,10 +59,10 @@ export default function CalendarEventCard() {
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative bg-white text-ink-900 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.10)] border border-cream-300 rounded-lg overflow-hidden"
+      className="relative bg-white text-ink-900 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.10)] border border-cream-300 rounded-lg overflow-hidden h-full min-h-[640px] grid grid-rows-[auto_1fr_auto]"
     >
       {/* Head */}
-      <div className="text-center px-7 sm:px-8 lg:px-10 pt-7 sm:pt-8">
+      <div className="text-center px-7 sm:px-8 lg:px-10 pt-7 sm:pt-8 lg:pt-10">
         <p className="font-display text-gold-700 text-[12.5px] tracking-[0.3em] uppercase">
           {event.shortName.toUpperCase()}
         </p>
@@ -74,20 +74,21 @@ export default function CalendarEventCard() {
         </div>
       </div>
 
-      {/* Body: photo + form */}
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-[1fr_1.15fr] gap-0">
-        <div className="relative aspect-[4/3] md:aspect-auto md:h-full min-h-[200px] overflow-hidden">
-          <img
-            src={event.cardPhoto}
-            alt="Kwekwe Golf Club parkland fairway"
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-            onError={(e) => { e.currentTarget.style.display = 'none'; }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/30 via-transparent to-transparent" />
-        </div>
+      {/* Body: photo (flex-grows to fill 1fr row) */}
+      <div className="relative min-h-[220px] overflow-hidden">
+        <img
+          src={event.cardPhoto}
+          alt="Kwekwe Golf Club parkland fairway"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-900/40 via-transparent to-transparent" />
+      </div>
 
-        <form onSubmit={submit} id="register" className="px-6 sm:px-7 py-6 sm:py-7 space-y-3.5">
+      {/* Footer form (pinned to bottom) */}
+      <div className="px-7 sm:px-8 lg:px-10 py-7 sm:py-8 lg:py-10 border-t border-cream-200">
+        <form onSubmit={submit} id="register" className="space-y-4">
           <div>
             <p className="text-[10.5px] tracking-[0.25em] uppercase text-gold-700 font-display mb-2">
               Secure Your Spot:

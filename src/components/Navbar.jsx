@@ -1,16 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { List, X, CaretDown, CaretRight } from '@phosphor-icons/react';
+import { List, X, CaretDown, CaretRight, MagnifyingGlass } from '@phosphor-icons/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { business } from '../data/siteData';
 import { haptic } from '../lib/haptics';
 
+// Top-level nav links — Newsletter is intentionally excluded from the
+// main nav row; it lives only as the right-end pill ("Newsletter Signup")
+// and as the bottom CTA in the mobile drawer.
 const topLinks = [
   { to: '/', label: 'Home' },
   // 2026 Calendar handled separately (dropdown)
   { to: '/past-events', label: 'Past Events (2025)' },
   { to: '/contact', label: 'Contact' },
-  { to: '/newsletter', label: 'Newsletter' },
 ];
 
 const calendarLinks = [
@@ -18,7 +20,7 @@ const calendarLinks = [
   { to: '/kwekwe-golf-day', label: 'Kwekwe Golf Day' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onOpenSearch }) {
   const [open, setOpen] = useState(false);           // mobile drawer
   const [dropdownOpen, setDropdownOpen] = useState(false); // desktop dropdown
   const [mobileCalOpen, setMobileCalOpen] = useState(false);
@@ -61,36 +63,46 @@ export default function Navbar() {
   const onCalendar =
     loc.pathname === '/coastal-classic' || loc.pathname === '/kwekwe-golf-day';
 
+  const openSearch = () => {
+    haptic(6);
+    if (onOpenSearch) onOpenSearch();
+  };
+
   return (
     <>
       <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-cream-300">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-5 lg:px-10 h-20 flex items-center justify-between gap-3">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group min-w-0 press-physics" onClick={() => haptic(6)}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-5 lg:px-10 h-14 sm:h-16 lg:h-[72px] flex items-center justify-between gap-3">
+          {/* Logo — nudge up 1px to optically center against the nav links */}
+          <Link
+            to="/"
+            className="flex items-center gap-2.5 sm:gap-3 group min-w-0 press-physics -translate-y-px"
+            onClick={() => haptic(6)}
+          >
             <img
               src={business.logo}
               alt={business.parent}
-              className="h-10 sm:h-11 w-auto shrink-0"
+              className="h-9 sm:h-10 lg:h-11 w-auto shrink-0"
               loading="eager"
               onError={(e) => { e.currentTarget.style.display = 'none'; }}
             />
             <div className="hidden xs:flex flex-col leading-tight">
-              <span className="font-display text-[15px] sm:text-[16px] text-navy-900 tracking-tight">
+              <span className="font-display text-[14px] sm:text-[15px] text-navy-900 tracking-tight">
                 Bard Santner
               </span>
-              <span className="font-serif italic text-[12px] sm:text-[13px] text-gold-700 tracking-wide -mt-0.5">
+              <span className="font-serif italic text-[11px] sm:text-[12px] text-gold-700 tracking-wide -mt-0.5">
                 Golf
               </span>
             </div>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
+          {/* Desktop nav — translate-y-px to bring link baselines toward the
+              logo's optical center (logo has a bit of visual weight low). */}
+          <nav className="hidden lg:flex items-center gap-7 xl:gap-9 translate-y-px">
             <NavLink
               to="/"
               end
               className={({ isActive }) =>
-                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative ${
+                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative py-1.5 ${
                   isActive ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
                 }`
               }
@@ -98,7 +110,7 @@ export default function Navbar() {
               {({ isActive }) => (
                 <>
                   Home
-                  {isActive && <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-gold-500" />}
+                  {isActive && <span className="absolute -bottom-1 left-0 right-0 h-px bg-gold-500" />}
                 </>
               )}
             </NavLink>
@@ -112,7 +124,7 @@ export default function Navbar() {
             >
               <button
                 onClick={() => { setDropdownOpen(v => !v); haptic(6); }}
-                className={`flex items-center gap-1.5 text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors ${
+                className={`flex items-center gap-1.5 text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors py-1.5 ${
                   onCalendar ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
                 }`}
                 aria-haspopup="menu"
@@ -120,7 +132,7 @@ export default function Navbar() {
               >
                 2026 Calendar
                 <CaretDown size={10} weight="bold" className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
-                {onCalendar && <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-gold-500" />}
+                {onCalendar && <span className="absolute -bottom-1 left-0 right-0 h-px bg-gold-500" />}
               </button>
               <AnimatePresence>
                 {dropdownOpen && (
@@ -152,7 +164,7 @@ export default function Navbar() {
             <NavLink
               to="/past-events"
               className={({ isActive }) =>
-                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative ${
+                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative py-1.5 ${
                   isActive ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
                 }`
               }
@@ -160,14 +172,14 @@ export default function Navbar() {
               {({ isActive }) => (
                 <>
                   Past Events (2025)
-                  {isActive && <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-gold-500" />}
+                  {isActive && <span className="absolute -bottom-1 left-0 right-0 h-px bg-gold-500" />}
                 </>
               )}
             </NavLink>
             <NavLink
               to="/contact"
               className={({ isActive }) =>
-                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative ${
+                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative py-1.5 ${
                   isActive ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
                 }`
               }
@@ -175,40 +187,32 @@ export default function Navbar() {
               {({ isActive }) => (
                 <>
                   Contact
-                  {isActive && <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-gold-500" />}
-                </>
-              )}
-            </NavLink>
-            <NavLink
-              to="/newsletter"
-              className={({ isActive }) =>
-                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative ${
-                  isActive ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  Newsletter
-                  {isActive && <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-gold-500" />}
+                  {isActive && <span className="absolute -bottom-1 left-0 right-0 h-px bg-gold-500" />}
                 </>
               )}
             </NavLink>
           </nav>
 
-          {/* Newsletter CTA + mobile menu */}
-          <div className="flex items-center gap-2">
+          {/* Right cluster: search icon + Newsletter Signup pill + mobile menu */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <button
+              onClick={openSearch}
+              aria-label="Open search"
+              className="h-10 w-10 flex items-center justify-center text-navy-900 hover:text-gold-700 transition-colors press-physics"
+            >
+              <MagnifyingGlass size={19} weight="regular" />
+            </button>
             <Link
               to="/newsletter"
               onClick={() => haptic(8)}
-              className="press-physics hidden sm:inline-flex items-center gap-2 px-4 h-10 border border-navy-800 text-[11.5px] tracking-[0.2em] uppercase font-medium text-navy-900 hover:bg-navy-800 hover:text-cream-50 transition-colors rounded-md"
+              className="press-physics hidden sm:inline-flex items-center gap-2 px-4 h-9 lg:h-10 border border-navy-800 text-[11px] lg:text-[11.5px] tracking-[0.18em] lg:tracking-[0.2em] uppercase font-medium text-navy-900 hover:bg-navy-800 hover:text-cream-50 transition-colors rounded-md"
             >
-              Newsletter
+              Newsletter Signup
             </Link>
             <button
               onClick={() => { setOpen(true); haptic(6); }}
               aria-label="Open menu"
-              className="h-11 w-11 flex lg:hidden items-center justify-center text-navy-900 press-physics"
+              className="h-10 w-10 flex lg:hidden items-center justify-center text-navy-900 press-physics"
             >
               <List size={22} />
             </button>
@@ -228,7 +232,7 @@ export default function Navbar() {
             open ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <div className="flex items-center justify-between px-6 h-20 border-b border-cream-300">
+          <div className="flex items-center justify-between px-6 h-14 sm:h-16 border-b border-cream-300">
             <span className="font-display text-lg text-navy-900">Menu</span>
             <button
               onClick={() => setOpen(false)}
@@ -309,7 +313,7 @@ export default function Navbar() {
               onClick={() => haptic(8)}
               className="mt-6 press-physics w-full flex items-center justify-center px-5 py-3.5 bg-navy-800 text-cream-50 text-[12px] tracking-[0.2em] uppercase font-medium rounded-md"
             >
-              Newsletter
+              Newsletter Signup
             </Link>
           </nav>
           <div className="px-6 py-6 border-t border-cream-300 space-y-1 text-xs text-ink-500">

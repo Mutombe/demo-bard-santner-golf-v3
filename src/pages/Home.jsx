@@ -35,7 +35,7 @@ export default function Home() {
         center sits exactly on the hero's bottom edge (half in hero, half in cream
         section below). The hero image/overlays are clipped by their own container.
       */}
-      <section className="relative min-h-[calc(100svh-5rem)] flex flex-col justify-center bg-navy-900">
+      <section className="relative min-h-[calc(100svh-3.5rem)] sm:min-h-[calc(100svh-4rem)] lg:min-h-[calc(100svh-72px)] flex flex-col justify-center bg-navy-900">
         {/* Photo — clipped in its own overflow-hidden container */}
         <div className="absolute inset-0 overflow-hidden">
           <img
@@ -94,11 +94,11 @@ export default function Home() {
                 <ArrowUpRight size={14} weight="bold" />
               </a>
               <Link
-                to="/rsvp"
+                to="/newsletter"
                 onClick={() => haptic(8)}
                 className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-cream-50/70 text-cream-50 hover:bg-cream-50 hover:text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
-                Sign In / RSVP
+                Newsletter Signup
               </Link>
             </div>
           </SectionReveal>
@@ -115,7 +115,7 @@ export default function Home() {
         >
           <div className="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-7">
-              <GoldFrameCard title={coastalClassic.name}>
+              <GoldFrameCard title={coastalClassic.name} tone="glass">
                 <Link
                   to={coastalClassic.ctaTo}
                   onClick={() => haptic(10)}
@@ -169,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* ========== 2026 CALENDAR ========== */}
-      <section id="calendar" className="bg-cream-100 py-16 sm:py-24 scroll-mt-20">
+      <section id="calendar" className="bg-cream-100 py-16 sm:py-24 scroll-mt-[72px]">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
           <SectionReveal>
             <div className="text-center mb-12 sm:mb-14">

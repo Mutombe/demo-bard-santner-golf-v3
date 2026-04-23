@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { useTilt } from '../hooks/useTilt';
 import { haptic } from '../lib/haptics';
 
+// NOTE: the card body uses `bg-white`; the gradient overlay at the bottom
+// of the image fades to the exact same white (#FFFFFF) so the image reads
+// as dissolving into the card body rather than butting against a hard edge.
 export default function PastEventCard({ event }) {
   const { ref, style, onMouseMove, onMouseLeave } = useTilt(3);
 
@@ -24,7 +27,13 @@ export default function PastEventCard({ event }) {
           className="absolute inset-0 h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
-        <span className="absolute bottom-3 left-3 bg-navy-900/85 text-gold-300 text-[9.5px] tracking-[0.22em] uppercase px-2.5 py-1 font-medium rounded-md">
+        {/* Soft fade — image dissolves into the card body (#FFFFFF) */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.85) 70%, #FFFFFF 100%)' }}
+        />
+        <span className="absolute bottom-3 left-3 bg-navy-900/85 text-gold-300 text-[9.5px] tracking-[0.22em] uppercase px-2.5 py-1 font-medium rounded-md z-10">
           {event.label}
         </span>
       </div>
