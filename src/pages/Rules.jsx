@@ -31,13 +31,13 @@ export default function Rules() {
                 href="/tournament-conditions.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="press-physics inline-flex items-center gap-2 px-6 py-3 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics inline-flex items-center gap-2 px-6 py-3 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 <FilePdf size={16} weight="duotone" /> Download PDF <ArrowUpRight size={13} weight="bold" />
               </a>
               <Link
                 to="/contact"
-                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-navy-800 text-navy-900 hover:bg-navy-800 hover:text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-navy-800 text-navy-900 hover:bg-navy-800 hover:text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 Ask Our Team
               </Link>

@@ -131,7 +131,7 @@ export default function Navbar() {
                     transition={{ duration: 0.18 }}
                     className="absolute top-full left-1/2 -translate-x-1/2 pt-3 min-w-[280px]"
                   >
-                    <div className="bg-white shadow-[0_12px_40px_rgba(15,20,32,0.12)] border border-cream-300 overflow-hidden">
+                    <div className="bg-white shadow-[0_12px_40px_rgba(15,20,32,0.12)] border border-cream-300 overflow-hidden rounded-md">
                       <div className="h-px bg-gold-500" />
                       {calendarLinks.map((l) => (
                         <Link
@@ -201,7 +201,7 @@ export default function Navbar() {
             <Link
               to="/newsletter"
               onClick={() => haptic(8)}
-              className="press-physics hidden sm:inline-flex items-center gap-2 px-4 h-10 border border-navy-800 text-[11.5px] tracking-[0.2em] uppercase font-medium text-navy-900 hover:bg-navy-800 hover:text-cream-50 transition-colors rounded-full"
+              className="press-physics hidden sm:inline-flex items-center gap-2 px-4 h-10 border border-navy-800 text-[11.5px] tracking-[0.2em] uppercase font-medium text-navy-900 hover:bg-navy-800 hover:text-cream-50 transition-colors rounded-md"
             >
               Newsletter
             </Link>
@@ -307,7 +307,7 @@ export default function Navbar() {
             <Link
               to="/newsletter"
               onClick={() => haptic(8)}
-              className="mt-6 press-physics w-full flex items-center justify-center px-5 py-3.5 bg-navy-800 text-cream-50 text-[12px] tracking-[0.2em] uppercase font-medium rounded-full"
+              className="mt-6 press-physics w-full flex items-center justify-center px-5 py-3.5 bg-navy-800 text-cream-50 text-[12px] tracking-[0.2em] uppercase font-medium rounded-md"
             >
               Newsletter
             </Link>

@@ -112,7 +112,7 @@ export default function Newsletter() {
                     type="submit"
                     disabled={submitting}
                     onClick={() => haptic(10)}
-                    className="press-physics brass-glint inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-navy-800 hover:bg-navy-900 disabled:opacity-60 disabled:cursor-not-allowed text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                    className="press-physics brass-glint inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-navy-800 hover:bg-navy-900 disabled:opacity-60 disabled:cursor-not-allowed text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
                   >
                     {submitting ? 'Sending…' : 'Subscribe'}
                     {!submitting && <ArrowUpRight size={14} weight="bold" />}

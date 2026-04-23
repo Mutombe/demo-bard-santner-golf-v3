@@ -14,7 +14,7 @@ export default function PastEventCard({ event }) {
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="group block bg-white transition-transform duration-500 will-change-transform border border-cream-300 hover:border-gold-300"
+      className="group block bg-white transition-transform duration-500 will-change-transform border border-cream-300 hover:border-gold-300 rounded-lg overflow-hidden"
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-cream-200">
         <img
@@ -24,7 +24,7 @@ export default function PastEventCard({ event }) {
           className="absolute inset-0 h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
-        <span className="absolute bottom-3 left-3 bg-navy-900/85 text-gold-300 text-[9.5px] tracking-[0.22em] uppercase px-2.5 py-1 font-medium">
+        <span className="absolute bottom-3 left-3 bg-navy-900/85 text-gold-300 text-[9.5px] tracking-[0.22em] uppercase px-2.5 py-1 font-medium rounded-md">
           {event.label}
         </span>
       </div>

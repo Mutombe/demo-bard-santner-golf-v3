@@ -16,7 +16,7 @@ export default function NavyEventPanel({ event }) {
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative bg-navy-800 text-cream-50 p-7 sm:p-8 lg:p-10 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)]"
+      className="relative bg-navy-800 text-cream-50 p-7 sm:p-8 lg:p-10 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)] rounded-lg overflow-hidden"
     >
       <div className="grain opacity-40" />
 
@@ -58,7 +58,7 @@ export default function NavyEventPanel({ event }) {
 
       {/* Footer row: prize + 19th hole side by side */}
       <div className="mt-7 grid grid-cols-1 sm:grid-cols-[1.35fr_1fr] gap-4">
-        <div className="bg-navy-900/60 border border-gold-500/40 p-4 text-center">
+        <div className="bg-navy-900/60 border border-gold-500/40 p-4 text-center rounded-md">
           <p className="font-display text-gold-400 text-[11px] tracking-[0.28em] uppercase">
             {event.prizeInFocus.headline}:
           </p>
@@ -66,7 +66,7 @@ export default function NavyEventPanel({ event }) {
             {event.prizeInFocus.title}
           </p>
         </div>
-        <div className="bg-gold-500 text-navy-900 p-4 text-center">
+        <div className="bg-gold-500 text-navy-900 p-4 text-center rounded-md">
           <p className="font-display text-navy-900 text-[11px] tracking-[0.28em] uppercase">
             {event.nineteenthHole.headline}:
           </p>
@@ -81,7 +81,7 @@ export default function NavyEventPanel({ event }) {
         <Link
           to={event.ctaTo}
           onClick={() => haptic(10)}
-          className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+          className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
         >
           {event.ctaLabel}
           <ArrowUpRight size={14} weight="bold" />

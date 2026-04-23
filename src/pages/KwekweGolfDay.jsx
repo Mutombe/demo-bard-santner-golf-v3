@@ -62,7 +62,7 @@ export default function KwekweGolfDay() {
               <a
                 href="#register"
                 onClick={() => haptic(10)}
-                className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 Register Now <ArrowUpRight size={14} weight="bold" />
               </a>
@@ -90,7 +90,7 @@ export default function KwekweGolfDay() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <SectionReveal>
-              <article className="bg-white border border-cream-300 p-7 sm:p-8 h-full">
+              <article className="bg-white border border-cream-300 p-7 sm:p-8 h-full rounded-lg">
                 <Users size={32} weight="duotone" className="text-gold-600" />
                 <h3 className="mt-4 font-display text-2xl text-navy-900">Individual</h3>
                 <p className="mt-3 text-ink-700 text-[15px] leading-relaxed">
@@ -102,7 +102,7 @@ export default function KwekweGolfDay() {
               </article>
             </SectionReveal>
             <SectionReveal delay={100}>
-              <article className="bg-navy-800 text-cream-50 p-7 sm:p-8 h-full relative overflow-hidden">
+              <article className="bg-navy-800 text-cream-50 p-7 sm:p-8 h-full relative overflow-hidden rounded-lg">
                 <div className="grain opacity-50" />
                 <div className="relative">
                   <Users size={32} weight="duotone" className="text-gold-400" />
@@ -186,7 +186,7 @@ export default function KwekweGolfDay() {
         <SectionReveal>
           <Link
             to="/"
-            className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-navy-800 text-navy-900 hover:bg-navy-800 hover:text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+            className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-navy-800 text-navy-900 hover:bg-navy-800 hover:text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
           >
             Back to 2026 Calendar
           </Link>

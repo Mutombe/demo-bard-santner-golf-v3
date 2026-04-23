@@ -57,7 +57,7 @@ export default function Contact() {
         <div className="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-10 lg:gap-14">
           {/* Left: offices & contact */}
           <SectionReveal className="space-y-8">
-            <div className="bg-white border border-cream-300 p-7">
+            <div className="bg-white border border-cream-300 p-7 rounded-lg">
               <p className="font-display text-gold-700 text-[11px] tracking-[0.28em] uppercase">{contact.officeHarare.label}</p>
               <h3 className="mt-2 font-display text-2xl text-navy-900">Milton Park, Harare</h3>
               <ul className="mt-4 space-y-3 text-[14.5px] text-ink-700">
@@ -66,7 +66,7 @@ export default function Contact() {
               </ul>
             </div>
 
-            <div className="bg-white border border-cream-300 p-7">
+            <div className="bg-white border border-cream-300 p-7 rounded-lg">
               <p className="font-display text-gold-700 text-[11px] tracking-[0.28em] uppercase">{contact.officeCapeTown.label}</p>
               <h3 className="mt-2 font-display text-2xl text-navy-900">Portside Tower, Cape Town</h3>
               <ul className="mt-4 space-y-3 text-[14.5px] text-ink-700">
@@ -75,7 +75,7 @@ export default function Contact() {
               </ul>
             </div>
 
-            <div className="bg-navy-800 text-cream-50 p-7 relative overflow-hidden">
+            <div className="bg-navy-800 text-cream-50 p-7 relative overflow-hidden rounded-lg">
               <div className="grain opacity-50" />
               <div className="relative space-y-3 text-[14.5px]">
                 <a href={`mailto:${contact.email}`} className="flex items-center gap-3 hover:text-gold-400">
@@ -93,7 +93,7 @@ export default function Contact() {
 
           {/* Right: form */}
           <SectionReveal delay={100}>
-            <form onSubmit={submit} className="bg-white border border-cream-300 p-7 sm:p-9">
+            <form onSubmit={submit} className="bg-white border border-cream-300 p-7 sm:p-9 rounded-lg">
               <h3 className="font-display text-2xl sm:text-3xl text-navy-900">Send us a note</h3>
               <p className="mt-2 font-serif italic text-ink-500 text-[14.5px]">
                 Choose a channel — we prefill either email or WhatsApp with your details.
@@ -105,7 +105,7 @@ export default function Contact() {
                     key={c}
                     type="button"
                     onClick={() => { setChannel(c); haptic(6); }}
-                    className={`press-physics px-4 py-2.5 text-[11.5px] tracking-[0.2em] uppercase font-medium rounded-full transition-colors border ${
+                    className={`press-physics px-4 py-2.5 text-[11.5px] tracking-[0.2em] uppercase font-medium rounded-md transition-colors border ${
                       channel === c
                         ? c === 'whatsapp'
                           ? 'bg-gold-500 border-gold-500 text-navy-900'
@@ -139,7 +139,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className={`press-physics brass-glint w-full mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors ${
+                className={`press-physics brass-glint w-full mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors ${
                   channel === 'whatsapp'
                     ? 'bg-gold-500 hover:bg-gold-400 text-navy-900'
                     : 'bg-navy-800 hover:bg-navy-900 text-cream-50'

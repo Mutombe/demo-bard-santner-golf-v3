@@ -36,7 +36,8 @@ export default function Home() {
             src={hero.image}
             alt="Cape Town coastal golf"
             loading="eager"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: 'center 75%' }}
             onError={(e) => { e.currentTarget.src = hero.fallback; }}
           />
           {/* Warm navy overlay */}
@@ -81,7 +82,7 @@ export default function Home() {
               <a
                 href="#calendar"
                 onClick={() => haptic(10)}
-                className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 View the 2026 Calendar
                 <ArrowUpRight size={14} weight="bold" />
@@ -89,7 +90,7 @@ export default function Home() {
               <Link
                 to="/rsvp"
                 onClick={() => haptic(8)}
-                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-cream-50/70 text-cream-50 hover:bg-cream-50 hover:text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-cream-50/70 text-cream-50 hover:bg-cream-50 hover:text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 Sign In / RSVP
               </Link>
@@ -116,7 +117,7 @@ export default function Home() {
                 <Link
                   to={coastalClassic.ctaTo}
                   onClick={() => haptic(10)}
-                  className="press-physics brass-glint inline-flex items-center justify-center w-full gap-2 px-5 py-3 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11px] sm:text-[11.5px] tracking-[0.18em] uppercase font-medium rounded-full transition-colors"
+                  className="press-physics brass-glint inline-flex items-center justify-center w-full gap-2 px-5 py-3 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11px] sm:text-[11.5px] tracking-[0.18em] uppercase font-medium rounded-md transition-colors"
                 >
                   {coastalClassic.ctaLabel}
                 </Link>
@@ -126,7 +127,7 @@ export default function Home() {
                 <Link
                   to={kwekweGolfDay.ctaTo}
                   onClick={() => haptic(10)}
-                  className="press-physics brass-glint inline-flex items-center justify-center w-full gap-2 px-5 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11px] sm:text-[11.5px] tracking-[0.18em] uppercase font-medium rounded-full transition-colors"
+                  className="press-physics brass-glint inline-flex items-center justify-center w-full gap-2 px-5 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11px] sm:text-[11.5px] tracking-[0.18em] uppercase font-medium rounded-md transition-colors"
                 >
                   {kwekweGolfDay.ctaLabel}
                 </Link>
@@ -235,7 +236,7 @@ export default function Home() {
               <Link
                 to="/past-events"
                 onClick={() => haptic(8)}
-                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-navy-800 text-navy-900 hover:bg-navy-800 hover:text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-navy-800 text-navy-900 hover:bg-navy-800 hover:text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 Browse the Full 2025 Archive <ArrowUpRight size={14} weight="bold" />
               </Link>
@@ -272,14 +273,14 @@ export default function Home() {
               <Link
                 to="/sponsorship"
                 onClick={() => haptic(10)}
-                className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 Sponsorship <ArrowUpRight size={14} weight="bold" />
               </Link>
               <Link
                 to="/contact"
                 onClick={() => haptic(8)}
-                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-cream-50/80 text-cream-50 hover:bg-cream-50 hover:text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-cream-50/80 text-cream-50 hover:bg-cream-50 hover:text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 Contact Us
               </Link>

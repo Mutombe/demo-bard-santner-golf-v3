@@ -59,7 +59,7 @@ export default function CalendarEventCard() {
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative bg-white text-ink-900 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.10)] border border-cream-300"
+      className="relative bg-white text-ink-900 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.10)] border border-cream-300 rounded-lg overflow-hidden"
     >
       {/* Head */}
       <div className="text-center px-7 sm:px-8 lg:px-10 pt-7 sm:pt-8">
@@ -96,7 +96,7 @@ export default function CalendarEventCard() {
               {event.formats.map((f) => (
                 <label
                   key={f}
-                  className={`cursor-pointer px-3 py-1.5 border transition-colors ${
+                  className={`cursor-pointer px-3 py-1.5 border transition-colors rounded-md ${
                     form.format === (f === 'INDIVIDUAL' ? 'Individual' : 'Corporate Four-Ball')
                       ? 'border-gold-500 text-navy-900 bg-cream-50'
                       : 'border-ink-200 text-ink-500 hover:border-gold-300'
@@ -136,7 +136,7 @@ export default function CalendarEventCard() {
           <button
             type="submit"
             disabled={submitting}
-            className="press-physics brass-glint w-full mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 bg-gold-500 hover:bg-gold-400 disabled:opacity-60 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+            className="press-physics brass-glint w-full mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 bg-gold-500 hover:bg-gold-400 disabled:opacity-60 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
           >
             {submitting ? 'Sending…' : 'Register Now'}
           </button>

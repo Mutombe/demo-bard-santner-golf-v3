@@ -89,18 +89,21 @@ body {
 .text-pretty { text-wrap: pretty; }
 
 /* Gold double-line frame — outer 1px gold + padding + inner 1px gold
-   Achieved with nested pseudo-border via box-shadow + padding ring. */
+   Achieved with nested pseudo-border via box-shadow + padding ring.
+   Subtle rounded corners — outer 8px (rounded-lg), inner 6px (rounded-md). */
 .gold-frame {
   position: relative;
   border: 1px solid var(--color-gold-500);
   padding: 10px;
   background: inherit;
+  border-radius: 8px;
 }
 .gold-frame::before {
   content: '';
   position: absolute;
   inset: 6px;
   border: 1px solid var(--color-gold-500);
+  border-radius: 6px;
   pointer-events: none;
 }
 
@@ -223,7 +226,7 @@ body {
 .leaflet-popup-content-wrapper {
   background: #FBF8F1;
   color: #0F1A2B;
-  border-radius: 2px;
+  border-radius: 8px;
   border: 1px solid rgba(199, 163, 82, 0.55);
   box-shadow: 0 12px 40px rgba(15, 20, 32, 0.18);
 }
@@ -249,7 +252,7 @@ body {
   background: white;
   color: var(--color-ink-900);
   border: 1px solid var(--color-ink-200);
-  border-radius: 2px;
+  border-radius: 6px;
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 .fld:focus {

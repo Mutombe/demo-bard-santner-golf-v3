@@ -62,13 +62,13 @@ export default function CoastalClassic() {
               <Link
                 to="/rsvp"
                 onClick={() => haptic(10)}
-                className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 <Key size={14} weight="bold" /> RSVP Gateway <ArrowUpRight size={14} weight="bold" />
               </Link>
               <Link
                 to="/contact"
-                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-cream-50/70 text-cream-50 hover:bg-cream-50 hover:text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-cream-50/70 text-cream-50 hover:bg-cream-50 hover:text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
               >
                 Concierge
               </Link>
@@ -110,7 +110,7 @@ export default function CoastalClassic() {
 
           {/* Full-width map row — real Leaflet / CartoDB Voyager */}
           <SectionReveal>
-            <div className="mb-12 lg:mb-16 bg-navy-800 p-6 sm:p-7 text-cream-50">
+            <div className="mb-12 lg:mb-16 bg-navy-800 p-6 sm:p-7 text-cream-50 rounded-lg">
               <div className="flex items-baseline justify-between gap-4 mb-4">
                 <p className="font-display text-gold-400 text-[11px] tracking-[0.3em] uppercase">
                   The Peninsula
@@ -126,7 +126,7 @@ export default function CoastalClassic() {
           <div className="space-y-6">
             {coastalClassic.courses.map((c, i) => (
                 <SectionReveal key={c.name} delay={i * 80}>
-                  <article className="bg-white border border-cream-300 p-6 sm:p-7 hover:border-gold-300 transition-colors">
+                  <article className="bg-white border border-cream-300 p-6 sm:p-7 hover:border-gold-300 transition-colors rounded-lg">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="font-serif italic text-gold-700 text-[12.5px] tracking-[0.18em] uppercase">
@@ -179,7 +179,7 @@ export default function CoastalClassic() {
           </SectionReveal>
 
           <SectionReveal delay={100}>
-            <div className="h-full bg-gold-500 text-navy-900 p-8 sm:p-10">
+            <div className="h-full bg-gold-500 text-navy-900 p-8 sm:p-10 rounded-lg">
               <Wine size={36} weight="duotone" className="text-navy-900" />
               <p className="mt-4 font-display text-navy-900 text-[11px] tracking-[0.3em] uppercase">
                 {coastalClassic.nineteenthHole.headline}
@@ -213,7 +213,7 @@ export default function CoastalClassic() {
             <Link
               to="/rsvp"
               onClick={() => haptic(10)}
-              className="press-physics brass-glint mt-8 inline-flex items-center gap-2 px-7 py-3.5 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+              className="press-physics brass-glint mt-8 inline-flex items-center gap-2 px-7 py-3.5 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
             >
               <Key size={14} weight="bold" /> RSVP Gateway <ArrowUpRight size={14} weight="bold" />
             </Link>

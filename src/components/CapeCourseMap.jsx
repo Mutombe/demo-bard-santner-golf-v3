@@ -83,7 +83,7 @@ export default function CapeCourseMap({ className = '' }) {
       {/* Gold double-line frame wrapper — matches site's .gold-frame utility. */}
       <div className="gold-frame bg-navy-900">
         <div
-          className="relative overflow-hidden h-[400px] md:h-[420px]"
+          className="relative overflow-hidden h-[400px] md:h-[420px] rounded-md"
           style={{
             // Subtle palette harmonization — warm the tiles toward the
             // cream/gold/navy brand. Kept light so the map still reads as real.

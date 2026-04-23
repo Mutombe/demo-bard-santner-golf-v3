@@ -64,13 +64,13 @@ export default function RsvpGateway() {
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <a
             href={`mailto:${contact.email}`}
-            className="press-physics inline-flex items-center gap-2 px-5 py-2.5 border border-navy-800 text-navy-900 text-[11.5px] tracking-[0.2em] uppercase rounded-full hover:bg-navy-800 hover:text-cream-50 transition-colors"
+            className="press-physics inline-flex items-center gap-2 px-5 py-2.5 border border-navy-800 text-navy-900 text-[11.5px] tracking-[0.2em] uppercase rounded-md hover:bg-navy-800 hover:text-cream-50 transition-colors"
           >
             Contact Concierge
           </a>
           <a
             href="/coastal-classic"
-            className="press-physics inline-flex items-center gap-2 px-5 py-2.5 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.2em] uppercase rounded-full transition-colors"
+            className="press-physics inline-flex items-center gap-2 px-5 py-2.5 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.2em] uppercase rounded-md transition-colors"
           >
             Event Details <ArrowUpRight size={14} weight="bold" />
           </a>
@@ -116,7 +116,7 @@ export default function RsvpGateway() {
       <button
         type="submit"
         disabled={submitting}
-        className="press-physics brass-glint w-full mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 bg-navy-800 hover:bg-navy-900 disabled:opacity-60 text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+        className="press-physics brass-glint w-full mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 bg-navy-800 hover:bg-navy-900 disabled:opacity-60 text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
       >
         {submitting ? 'Verifying…' : 'Confirm RSVP'}
       </button>

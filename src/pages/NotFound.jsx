@@ -21,7 +21,7 @@ export default function NotFound() {
           </p>
           <Link
             to="/"
-            className="press-physics inline-flex items-center gap-2 mt-8 px-6 py-3 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors"
+            className="press-physics inline-flex items-center gap-2 mt-8 px-6 py-3 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
           >
             Back to Home <ArrowUpRight size={14} weight="bold" />
           </Link>

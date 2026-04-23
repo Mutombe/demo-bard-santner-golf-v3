@@ -55,7 +55,7 @@ export default function Sponsorship() {
               const Icon = whyIcons[i];
               return (
                 <SectionReveal key={w.title} delay={i * 100}>
-                  <article className="bg-white border border-cream-300 p-7 h-full hover:border-gold-300 transition-colors">
+                  <article className="bg-white border border-cream-300 p-7 h-full hover:border-gold-300 transition-colors rounded-lg">
                     <Icon size={32} weight="duotone" className="text-gold-600" />
                     <h3 className="mt-4 font-display text-navy-900 text-2xl leading-tight">{w.title}</h3>
                     <p className="mt-3 text-ink-700 text-[15px] leading-relaxed">{w.body}</p>
@@ -104,7 +104,7 @@ export default function Sponsorship() {
             {sponsorship.tiers.map((t, i) => (
               <SectionReveal key={t.name} delay={i * 80}>
                 <article
-                  className={`h-full p-7 sm:p-8 border flex flex-col ${
+                  className={`h-full p-7 sm:p-8 border flex flex-col rounded-lg ${
                     t.highlighted
                       ? 'bg-navy-800 text-cream-50 border-gold-500'
                       : 'bg-white text-ink-900 border-cream-300 hover:border-gold-300 transition-colors'
@@ -129,7 +129,7 @@ export default function Sponsorship() {
                     <Link
                       to="/contact"
                       onClick={() => haptic(10)}
-                      className={`press-physics w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-[11px] tracking-[0.22em] uppercase font-medium rounded-full transition-colors ${
+                      className={`press-physics w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-[11px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors ${
                         t.highlighted
                           ? 'bg-gold-500 hover:bg-gold-400 text-navy-900'
                           : 'border border-navy-800 text-navy-900 hover:bg-navy-800 hover:text-cream-50'
