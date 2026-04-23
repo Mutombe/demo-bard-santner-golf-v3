@@ -95,8 +95,10 @@ body {
   position: relative;
   border: 1px solid var(--color-gold-500);
   padding: 10px;
-  background: inherit;
   border-radius: 8px;
+  /* background is set by the bg-white / bg-cream-50 Tailwind utility on the element —
+     do NOT override with `inherit`, otherwise cards that overlap the hero image
+     show through and their content becomes unreadable. */
 }
 .gold-frame::before {
   content: '';
