@@ -108,21 +108,23 @@ export default function CoastalClassic() {
             </div>
           </SectionReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-10 lg:gap-14 items-start">
-            <SectionReveal>
-              <div className="sticky top-24 bg-navy-800 p-6 sm:p-7 text-cream-50">
-                <p className="font-display text-gold-400 text-[11px] tracking-[0.3em] uppercase mb-3">
+          {/* Full-width map row — real Leaflet / CartoDB Voyager */}
+          <SectionReveal>
+            <div className="mb-12 lg:mb-16 bg-navy-800 p-6 sm:p-7 text-cream-50">
+              <div className="flex items-baseline justify-between gap-4 mb-4">
+                <p className="font-display text-gold-400 text-[11px] tracking-[0.3em] uppercase">
                   The Peninsula
                 </p>
-                <CapeCourseMap className="w-full h-auto" />
-                <p className="mt-4 text-[13px] font-serif italic text-cream-100/80 leading-relaxed">
-                  Four courses across 60 kilometres of coast. Hotel base: The Cape Grace, V&amp;A Waterfront.
+                <p className="hidden sm:block font-serif italic text-cream-100/70 text-[12.5px]">
+                  Four courses across 60 kilometres of coast &middot; Hotel base: The Cape Grace, V&amp;A Waterfront
                 </p>
               </div>
-            </SectionReveal>
+              <CapeCourseMap className="w-full" />
+            </div>
+          </SectionReveal>
 
-            <div className="space-y-6">
-              {coastalClassic.courses.map((c, i) => (
+          <div className="space-y-6">
+            {coastalClassic.courses.map((c, i) => (
                 <SectionReveal key={c.name} delay={i * 80}>
                   <article className="bg-white border border-cream-300 p-6 sm:p-7 hover:border-gold-300 transition-colors">
                     <div className="flex items-start justify-between gap-4">
@@ -143,9 +145,8 @@ export default function CoastalClassic() {
                       {c.long}
                     </p>
                   </article>
-                </SectionReveal>
-              ))}
-            </div>
+              </SectionReveal>
+            ))}
           </div>
         </div>
       </section>

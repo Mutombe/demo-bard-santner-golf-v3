@@ -213,6 +213,33 @@ body {
   outline-offset: 3px;
 }
 
+/* ---- Leaflet branded overrides (Coastal Classic map) ---- */
+/* Strip Leaflet's default div-icon background/border so our SVG pin shows clean. */
+.leaflet-div-icon.bsg-gold-pin {
+  background: transparent;
+  border: none;
+}
+/* Popup styling to match brand (cream + gold hairline + navy text). */
+.leaflet-popup-content-wrapper {
+  background: #FBF8F1;
+  color: #0F1A2B;
+  border-radius: 2px;
+  border: 1px solid rgba(199, 163, 82, 0.55);
+  box-shadow: 0 12px 40px rgba(15, 20, 32, 0.18);
+}
+.leaflet-popup-content { margin: 12px 14px; font-family: 'Inter', system-ui, sans-serif; }
+.leaflet-popup-tip { background: #FBF8F1; border: 1px solid rgba(199, 163, 82, 0.55); }
+.leaflet-container {
+  background: #EEE7D4;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.leaflet-control-attribution {
+  background: rgba(251, 248, 241, 0.85) !important;
+  color: #3E4A5F !important;
+  font-size: 10px !important;
+}
+.leaflet-control-attribution a { color: #8A6D2D !important; }
+
 /* Form inputs */
 .fld {
   width: 100%;

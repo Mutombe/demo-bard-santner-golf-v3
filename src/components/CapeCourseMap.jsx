@@ -1,107 +1,179 @@
 import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 
-// Stylised Cape Peninsula / False Bay map — gold strokes on transparent bg.
-// Course dots are positioned absolutely with label hints.
-export default function CapeCourseMap({ courses = [], className = '' }) {
-  // Positions for the 4 course dots — tuned to approximate their real locations
-  // on the stylised peninsula outline.
-  const dots = [
-    { name: 'King David Mowbray', x: 38, y: 32 },
-    { name: 'Clovelly', x: 52, y: 78 },
-    { name: 'De Zalze', x: 82, y: 28 },
-    { name: 'Rondebosch', x: 42, y: 42 },
-  ];
+// Four Cape Peninsula courses with real coordinates.
+// Numbered I–IV in the order they are played during the Coastal Classic week.
+const COURSES = [
+  {
+    roman: 'I',
+    name: 'King David Mowbray Golf Club',
+    tagline: 'Parkland excellence in the heart of the city.',
+    lat: -33.9428,
+    lng: 18.5008,
+  },
+  {
+    roman: 'II',
+    name: 'Clovelly Country Club',
+    tagline: 'Coastal and rolling in the Silvermine Valley.',
+    lat: -34.1039,
+    lng: 18.4478,
+  },
+  {
+    roman: 'III',
+    name: 'De Zalze Golf Club',
+    tagline: 'A championship test among the Stellenbosch vineyards.',
+    lat: -33.9697,
+    lng: 18.8739,
+  },
+  {
+    roman: 'IV',
+    name: 'Rondebosch Golf Club',
+    tagline: 'Classic Cape views and a scenic, challenging layout.',
+    lat: -33.9769,
+    lng: 18.4936,
+  },
+];
+
+// Branded gold pin (DivIcon). Anchors at the bottom tip of the pin.
+function goldPin(roman) {
+  const html = `
+    <div style="
+      position: relative;
+      width: 34px; height: 46px;
+      filter: drop-shadow(0 3px 4px rgba(15,20,32,0.35));
+    ">
+      <svg viewBox="0 0 34 46" width="34" height="46" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 1.5
+                 C25.56 1.5 32.5 8.44 32.5 17
+                 C32.5 27.5 17 44.5 17 44.5
+                 C17 44.5 1.5 27.5 1.5 17
+                 C1.5 8.44 8.44 1.5 17 1.5 Z"
+              fill="#C7A352"
+              stroke="#FBF8F1"
+              stroke-width="1.5"/>
+        <circle cx="17" cy="17" r="8" fill="#0F1A2B"/>
+        <text x="17" y="20.5"
+              text-anchor="middle"
+              font-family="'Playfair Display', 'Cormorant Garamond', serif"
+              font-size="10"
+              font-weight="700"
+              fill="#C7A352"
+              letter-spacing="0.02em">${roman}</text>
+      </svg>
+    </div>
+  `;
+  return L.divIcon({
+    html,
+    className: 'bsg-gold-pin', // prevents default leaflet-div-icon bg/border
+    iconSize: [34, 46],
+    iconAnchor: [17, 44],
+    popupAnchor: [0, -40],
+  });
+}
+
+export default function CapeCourseMap({ className = '' }) {
+  // Cape Peninsula centroid — roughly between the 4 courses, biased west to
+  // keep the coastline visible on the left edge of the frame.
+  const center = [-34.02, 18.55];
+  const zoom = 10;
 
   return (
-    <svg
-      viewBox="0 0 100 110"
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="Map of the four Cape Town courses"
-    >
-      <defs>
-        <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1C2E4C" />
-          <stop offset="100%" stopColor="#0F1A2B" />
-        </linearGradient>
-        <filter id="soft">
-          <feGaussianBlur stdDeviation="0.6" />
-        </filter>
-      </defs>
+    <div className={className}>
+      {/* Gold double-line frame wrapper — matches site's .gold-frame utility. */}
+      <div className="gold-frame bg-navy-900">
+        <div
+          className="relative overflow-hidden h-[400px] md:h-[420px]"
+          style={{
+            // Subtle palette harmonization — warm the tiles toward the
+            // cream/gold/navy brand. Kept light so the map still reads as real.
+            filter: 'sepia(0.15) saturate(0.95) brightness(0.98)',
+          }}
+        >
+          <MapContainer
+            center={center}
+            zoom={zoom}
+            scrollWheelZoom={false}
+            style={{ height: '100%', width: '100%' }}
+            attributionControl={true}
+          >
+            {/* CartoDB Voyager — warm parchment tones, no API key required.
+                Complements the navy + gold editorial palette. */}
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              subdomains={['a', 'b', 'c', 'd']}
+              maxZoom={19}
+            />
 
-      {/* Sea bg subtle */}
-      <rect x="0" y="0" width="100" height="110" fill="url(#sea)" opacity="0" />
+            {COURSES.map((c) => (
+              <Marker
+                key={c.name}
+                position={[c.lat, c.lng]}
+                icon={goldPin(c.roman)}
+              >
+                <Popup>
+                  <div style={{ minWidth: 180 }}>
+                    <div
+                      style={{
+                        fontFamily:
+                          "'Cormorant Garamond', 'Playfair Display', serif",
+                        fontStyle: 'italic',
+                        fontSize: 11,
+                        letterSpacing: '0.18em',
+                        textTransform: 'uppercase',
+                        color: '#8A6D2D',
+                        marginBottom: 4,
+                      }}
+                    >
+                      Round {c.roman}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily:
+                          "'Playfair Display', 'Cormorant Garamond', serif",
+                        fontSize: 15,
+                        lineHeight: 1.25,
+                        color: '#0F1A2B',
+                        fontWeight: 600,
+                        marginBottom: 4,
+                      }}
+                    >
+                      {c.name}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily:
+                          "'Cormorant Garamond', 'Playfair Display', serif",
+                        fontStyle: 'italic',
+                        fontSize: 13,
+                        color: '#3E4A5F',
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {c.tagline}
+                    </div>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </div>
+      </div>
 
-      {/* Peninsula outline — stylised Cape Peninsula + False Bay cove */}
-      <path
-        d="M 30 6
-           C 32 18, 28 28, 30 40
-           C 32 52, 26 62, 28 74
-           C 30 84, 36 92, 42 96
-           C 48 100, 56 100, 60 94
-           C 64 88, 62 80, 58 74
-           C 54 68, 56 62, 60 58
-           C 66 52, 74 48, 82 44
-           C 90 40, 94 34, 92 26
-           C 90 18, 82 12, 72 10
-           C 62 8, 50 8, 40 6 Z"
-        fill="none"
-        stroke="#C7A352"
-        strokeWidth="0.9"
-        strokeLinejoin="round"
-      />
-
-      {/* Inner contour for depth */}
-      <path
-        d="M 34 12
-           C 35 22, 32 32, 34 44
-           C 36 56, 30 66, 34 80
-           C 38 92, 50 96, 58 90
-           C 62 86, 60 78, 56 72"
-        fill="none"
-        stroke="#C7A352"
-        strokeWidth="0.4"
-        opacity="0.45"
-        strokeDasharray="1.2 1.5"
-      />
-
-      {/* Dashed coastline flourish */}
-      <path
-        d="M 12 52 Q 22 48, 28 56 T 40 58"
-        fill="none"
-        stroke="#C7A352"
-        strokeWidth="0.35"
-        opacity="0.4"
-        strokeDasharray="1.5 1.5"
-      />
-
-      {/* North indicator */}
-      <g transform="translate(88,10)">
-        <circle cx="0" cy="0" r="2.5" fill="none" stroke="#C7A352" strokeWidth="0.3" opacity="0.6" />
-        <text x="0" y="-3.5" textAnchor="middle" fontFamily="'Cormorant Garamond', serif" fontSize="2.6" fill="#C7A352" opacity="0.9">N</text>
-        <line x1="0" y1="0" x2="0" y2="-2.2" stroke="#C7A352" strokeWidth="0.35" />
-      </g>
-
-      {/* Course dots */}
-      {dots.map((d, i) => (
-        <g key={d.name}>
-          <circle cx={d.x} cy={d.y} r="2.4" fill="#C7A352" opacity="0.22" filter="url(#soft)" />
-          <circle cx={d.x} cy={d.y} r="1.1" fill="#C7A352" />
-          <circle cx={d.x} cy={d.y} r="0.4" fill="#FBF8F1" />
-          <line
-            x1={d.x} y1={d.y}
-            x2={d.x + (i % 2 === 0 ? -3 : 3)} y2={d.y - 2}
-            stroke="#C7A352"
-            strokeWidth="0.2"
-            opacity="0.6"
-          />
-        </g>
-      ))}
-
-      {/* False Bay label */}
-      <text x="62" y="86" fontFamily="'Cormorant Garamond', serif" fontStyle="italic" fontSize="2.8" fill="#C7A352" opacity="0.7">False Bay</text>
-      <text x="12" y="46" fontFamily="'Cormorant Garamond', serif" fontStyle="italic" fontSize="2.8" fill="#C7A352" opacity="0.7">Atlantic</text>
-    </svg>
+      {/* Legend — editorial typography, numbered rounds */}
+      <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 text-[12px] leading-tight">
+        {COURSES.map((c) => (
+          <li key={c.name} className="flex items-baseline gap-2">
+            <span className="font-display text-gold-400 text-[13px] tracking-wider shrink-0 w-5">
+              {c.roman}
+            </span>
+            <span className="font-serif italic text-cream-100/85">
+              {c.name.replace(' Golf Club', '').replace(' Country Club', '')}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

@@ -22,8 +22,8 @@ export default function Sponsorship() {
       <section className="relative min-h-[52vh] flex items-end bg-navy-900 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/images/royal-harare-06.jpg"
-            alt="Royal Harare fairway"
+            src="https://images.unsplash.com/photo-1530023367847-a683933f4172?w=2000&q=80&auto=format&fit=crop"
+            alt="Parkland fairway"
             loading="eager"
             className="absolute inset-0 w-full h-full object-cover object-center"
             onError={(e) => { e.currentTarget.style.display = 'none'; }}

@@ -43,7 +43,8 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm">
               <li><Link to="/coastal-classic" className="text-cream-200/80 hover:text-gold-400 transition-colors">Coastal Classic</Link></li>
               <li><Link to="/kwekwe-golf-day" className="text-cream-200/80 hover:text-gold-400 transition-colors">Kwekwe Golf Day</Link></li>
-              <li><Link to="/rsvp" className="text-cream-200/80 hover:text-gold-400 transition-colors">Sign In / RSVP</Link></li>
+              <li><Link to="/newsletter" className="text-cream-200/80 hover:text-gold-400 transition-colors">Newsletter</Link></li>
+              <li><Link to="/rsvp" className="text-cream-200/80 hover:text-gold-400 transition-colors">Classic RSVP Gateway</Link></li>
               <li><Link to="/rules" className="text-cream-200/80 hover:text-gold-400 transition-colors">Rules &amp; Conditions</Link></li>
             </ul>
           </div>

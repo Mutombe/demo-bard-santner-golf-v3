@@ -9,8 +9,8 @@ const topLinks = [
   { to: '/', label: 'Home' },
   // 2026 Calendar handled separately (dropdown)
   { to: '/past-events', label: 'Past Events (2025)' },
-  { to: '/sponsorship', label: 'Sponsorship' },
   { to: '/contact', label: 'Contact' },
+  { to: '/newsletter', label: 'Newsletter' },
 ];
 
 const calendarLinks = [
@@ -165,21 +165,6 @@ export default function Navbar() {
               )}
             </NavLink>
             <NavLink
-              to="/sponsorship"
-              className={({ isActive }) =>
-                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative ${
-                  isActive ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  Sponsorship
-                  {isActive && <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-gold-500" />}
-                </>
-              )}
-            </NavLink>
-            <NavLink
               to="/contact"
               className={({ isActive }) =>
                 `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative ${
@@ -194,16 +179,31 @@ export default function Navbar() {
                 </>
               )}
             </NavLink>
+            <NavLink
+              to="/newsletter"
+              className={({ isActive }) =>
+                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative ${
+                  isActive ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  Newsletter
+                  {isActive && <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-gold-500" />}
+                </>
+              )}
+            </NavLink>
           </nav>
 
-          {/* RSVP CTA + mobile menu */}
+          {/* Newsletter CTA + mobile menu */}
           <div className="flex items-center gap-2">
             <Link
-              to="/rsvp"
+              to="/newsletter"
               onClick={() => haptic(8)}
               className="press-physics hidden sm:inline-flex items-center gap-2 px-4 h-10 border border-navy-800 text-[11.5px] tracking-[0.2em] uppercase font-medium text-navy-900 hover:bg-navy-800 hover:text-cream-50 transition-colors rounded-full"
             >
-              Sign In / RSVP
+              Newsletter
             </Link>
             <button
               onClick={() => { setOpen(true); haptic(6); }}
@@ -305,11 +305,11 @@ export default function Navbar() {
             ))}
 
             <Link
-              to="/rsvp"
+              to="/newsletter"
               onClick={() => haptic(8)}
               className="mt-6 press-physics w-full flex items-center justify-center px-5 py-3.5 bg-navy-800 text-cream-50 text-[12px] tracking-[0.2em] uppercase font-medium rounded-full"
             >
-              Sign In / RSVP
+              Newsletter
             </Link>
           </nav>
           <div className="px-6 py-6 border-t border-cream-300 space-y-1 text-xs text-ink-500">

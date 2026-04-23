@@ -17,6 +17,7 @@ import PastEventDetail from './pages/PastEventDetail';
 import Sponsorship from './pages/Sponsorship';
 import Contact from './pages/Contact';
 import RsvpSignIn from './pages/RsvpSignIn';
+import Newsletter from './pages/Newsletter';
 import Rules from './pages/Rules';
 import NotFound from './pages/NotFound';
 
@@ -57,6 +58,7 @@ export default function App() {
               <Route path="/sponsorship" element={<Sponsorship />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/rsvp" element={<RsvpSignIn />} />
+              <Route path="/newsletter" element={<Newsletter />} />
               <Route path="/rules" element={<Rules />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

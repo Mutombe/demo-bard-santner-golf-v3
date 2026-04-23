@@ -26,7 +26,8 @@ export const business = {
 export const hero = {
   image:
     'https://images.unsplash.com/photo-1592919505780-303950717480?w=2000&q=80&auto=format&fit=crop',
-  fallback: '/images/hero-9th-fairway.jpg',
+  fallback:
+    'https://images.unsplash.com/photo-1587381420270-3e1a5b9e6904?w=2000&q=80&auto=format&fit=crop',
   kicker: '2026 Season',
   headlineLines: [
     'ELEVATING THE GAME:',
@@ -142,7 +143,8 @@ export const pastEvents = [
     label: 'Royal Harare',
     title: 'The Road to SA Golf Challenge 2025 Highlights',
     date: 'January–October 2025',
-    image: '/images/event-2025-highlights.jpg',
+    image:
+      'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=1600&q=80&auto=format&fit=crop',
     excerpt:
       'Nine rounds. One season. The inaugural Road to South Africa drew Zimbabwe\'s finest amateur field to Royal Harare for a year-long points race culminating in the Nedbank Challenge trip.',
   },
@@ -151,7 +153,8 @@ export const pastEvents = [
     label: 'Royal Harare',
     title: 'The Gold Golf: Winners to Investec SA Open',
     date: 'March 2025',
-    image: '/images/event-2025-trophy.jpg',
+    image:
+      'https://images.unsplash.com/photo-1566024287286-457247b70310?w=1600&q=80&auto=format&fit=crop',
     excerpt:
       'A one-day showcase at Royal Harare that sent two low-handicap winners to Johannesburg for the Investec South African Open — with stay, tee times and Friday round included.',
   },
@@ -160,7 +163,8 @@ export const pastEvents = [
     label: 'Royal Harare',
     title: 'Wall of Fame: Winners to Investec SA Open & Nedbank Challenge',
     date: 'October 2025',
-    image: '/images/event-2025-group.jpg',
+    image:
+      'https://images.unsplash.com/photo-1545972154-9bb223aac798?w=1600&q=80&auto=format&fit=crop',
     excerpt:
       'The season finale unveiled the Wall of Fame — a permanent ledger of winners at Royal Harare\'s Clubhouse, now carrying five names bound for the 2026 majors on our tab.',
   },
@@ -169,7 +173,8 @@ export const pastEvents = [
     label: 'Royal Harare',
     title: 'The Winter Series — Three-Round Stableford',
     date: 'June–August 2025',
-    image: '/images/royal-harare-03.jpg',
+    image:
+      'https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&auto=format&fit=crop',
     excerpt:
       'Short days, firm fairways, and Royal Harare at its most honest. The Winter Series ran three Saturdays of Stableford with a club-champion crowned on count-back in August.',
   },
@@ -178,7 +183,8 @@ export const pastEvents = [
     label: 'Royal Harare',
     title: 'The Ladies\' Day at Royal Harare',
     date: 'May 2025',
-    image: '/images/royal-harare-05.jpg',
+    image:
+      'https://images.unsplash.com/photo-1565992441121-4367c2967103?w=1600&q=80&auto=format&fit=crop',
     excerpt:
       'A sold-out field of 72 under a cloudless Harare sky. Mixed-greensome format, bespoke trophies, and a long-table lunch on the Clubhouse lawn.',
   },
@@ -187,7 +193,8 @@ export const pastEvents = [
     label: 'Royal Harare',
     title: 'The Corporate Shield 2025',
     date: 'September 2025',
-    image: '/images/royal-harare-02.jpg',
+    image:
+      'https://images.unsplash.com/photo-1530023367847-a683933f4172?w=1600&q=80&auto=format&fit=crop',
     excerpt:
       'Fifteen corporate four-balls competed for the inaugural Bard Santner Shield — now an annual fixture on Royal Harare\'s calendar.',
   },

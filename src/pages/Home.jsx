@@ -98,9 +98,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ========== TWIN FRAMED EVENT CARDS (overlap hero bottom) ========== */}
+      {/* ========== TWIN FRAMED EVENT CARDS (float on hero/cream seam) ========== */}
+      {/*
+        The cards sit visually *on* the border line between the hero image and
+        the cream section below — their vertical center aligns with the seam,
+        so half the card lives in the hero and half in the cream block.
+
+        Desktop (md+): cards are side-by-side; card is ~240px tall → pull up ~120px.
+        Mobile:        cards stack; stack is ~500–560px tall → pull up ~260px so
+                       the stack's vertical center straddles the seam.
+      */}
       <section className="relative bg-cream-100">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12 -mt-40 sm:-mt-44 lg:-mt-48 relative z-10">
+        <div className="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12 -mt-[260px] sm:-mt-[280px] md:-mt-[120px] lg:-mt-[130px] relative z-20">
           <SectionReveal>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-7">
               <GoldFrameCard title={coastalClassic.name}>
@@ -239,8 +248,8 @@ export default function Home() {
       <section className="relative py-20 sm:py-28 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/images/clubhouse.jpg"
-            alt="Clubhouse"
+            src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=2000&q=80&auto=format&fit=crop"
+            alt="Clubhouse at sundown"
             loading="lazy"
             className="absolute inset-0 w-full h-full object-cover object-center"
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
