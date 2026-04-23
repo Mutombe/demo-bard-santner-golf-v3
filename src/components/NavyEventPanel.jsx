@@ -1,21 +1,22 @@
 import React from 'react';
 import { useTilt } from '../hooks/useTilt';
 import CapePeninsulaMapSvg from './CapePeninsulaMapSvg';
+import CountUp from './CountUp';
 
 // The Coastal Classic 2026 homepage card — deep navy, gold type,
 // lightweight SVG peninsula map (Leaflet stays on the detail page),
-// 2x2 course grid, prize + 19th-hole footer.
+// 2x2 course grid, asymmetric prize + 19th-hole footer.
 //
-// Layout matches the client mockup:
-//   1. Single-line gold Playfair header  "COASTAL CLASSIC 2026 | SEPT 13–19, 2026 | CAPE TOWN"
-//   2. Thin gold hairline rule
-//   3. Body: SVG map on the left, 2x2 course grid on the right
-//   4. Footer row: prize (wider) + 19th hole (narrower)
-//   5. NO CTA button inside this card — action lives on the twin framed cards above.
+// Layout mirrors the client mockup:
+//   1. HEADER  — single centred line with pipe separators
+//                "COASTAL CLASSIC 2026 | SEPT 13-19, 2026 | CAPE TOWN"
+//   2. BODY    — 2-col grid, map left (40%), 2x2 courses right (60%)
+//   3. FOOTER  — asymmetric 2-col, prize (1.65fr) + 19th hole (1fr)
 //
-// Padding / row rhythm mirrors CalendarEventCard so the two cards read as
-// visually symmetric: `p-7 sm:p-8 lg:p-10`, `grid-rows-[auto_1fr_auto]` so
-// the footer row pins to the bottom and the two cards bottom-align on desktop.
+// Sibling-card symmetry: NO fixed min-h — instead relies on the parent
+// grid's default items-stretch so this card and the Kwekwe card match
+// the taller one's height. We use `flex flex-col` so the footer can pin
+// to `mt-auto` and the body can `flex-1` to absorb the slack.
 export default function NavyEventPanel({ event }) {
   const { ref, style, onMouseMove, onMouseLeave } = useTilt(2);
 
@@ -25,23 +26,43 @@ export default function NavyEventPanel({ event }) {
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative bg-navy-800 text-cream-50 p-7 sm:p-8 lg:p-10 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)] rounded-lg overflow-hidden h-full min-h-[640px] grid grid-rows-[auto_1fr_auto] gap-6 sm:gap-7"
+      className="relative bg-navy-800 text-cream-50 p-6 sm:p-7 lg:p-9 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)] rounded-lg overflow-hidden h-full flex flex-col gap-5 sm:gap-6"
     >
       <div className="grain opacity-40 pointer-events-none absolute inset-0" />
 
-      {/* ── 1. Header row ──────────────────────────────────────────── */}
-      <div className="relative text-center">
+      {/* ── A) HEADER — one centred line, pipe separators ───────────── */}
+      <header className="relative text-center">
         <h3
-          className="font-display text-gold-400 tracking-[0.12em] leading-tight text-balance"
-          style={{ fontSize: 'clamp(0.95rem, 2.1vw, 1.35rem)' }}
+          className="font-display text-gold-400 tracking-[0.1em] leading-tight text-balance"
+          style={{ fontSize: 'clamp(1rem, 2vw, 1.4rem)' }}
         >
           <span className="whitespace-nowrap">
-            {event.shortName.toUpperCase()}
+            COASTAL CLASSIC{' '}
+            <CountUp
+              from={1898}
+              to={2026}
+              duration={2000}
+              format={(n) => Math.round(n).toString()}
+            />
           </span>
           <span className="mx-2 sm:mx-3 text-gold-500">|</span>
-          <span className="whitespace-nowrap">{event.dateLabel}</span>
+          <span className="whitespace-nowrap">
+            SEPT{' '}
+            <CountUp from={1} to={13} duration={1700} format={(n) => Math.round(n).toString()} />
+            <span>–</span>
+            <CountUp
+              from={1}
+              to={19}
+              duration={1700}
+              startDelay={150}
+              format={(n) => Math.round(n).toString()}
+            />
+            , 2026
+          </span>
           <span className="mx-2 sm:mx-3 text-gold-500">|</span>
-          <span className="whitespace-nowrap">{event.location.toUpperCase()}</span>
+          <span className="whitespace-nowrap">
+            {(event.location || 'CAPE TOWN').toUpperCase()}
+          </span>
         </h3>
 
         {/* Thin gold hairline rule under header */}
@@ -52,28 +73,33 @@ export default function NavyEventPanel({ event }) {
             style={{ width: '60%' }}
           />
         </div>
-      </div>
+      </header>
 
-      {/* ── 2. Body: SVG map + 2x2 course grid (flex-grows to fill) ── */}
-      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-start">
-        {/* Left: SVG peninsula map */}
+      {/* ── B) BODY — map (40%) + 2x2 course grid (60%) ──────────────── */}
+      <div className="relative grid grid-cols-1 md:grid-cols-[minmax(180px,40%)_1fr] gap-6 items-start flex-1">
+        {/* Left column: SVG peninsula map in gold-frame cream card */}
         <div className="flex items-start justify-center md:justify-start">
-          <CapePeninsulaMapSvg className="w-full max-w-[260px]" />
+          <CapePeninsulaMapSvg className="w-full max-w-[240px]" />
         </div>
 
-        {/* Right: 2x2 course grid */}
-        <div>
-          <p className="text-[10.5px] tracking-[0.25em] uppercase text-gold-400 font-display mb-4">
+        {/* Right column: eyebrow + hairline + 2x2 course grid */}
+        <div className="flex flex-col">
+          <p className="text-[10.5px] tracking-[0.22em] uppercase text-gold-400 font-display">
             Secure Your Spot:
           </p>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+          <span
+            aria-hidden
+            className="block mt-2 h-px bg-gold-500/50"
+            style={{ width: '100%' }}
+          />
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
             {event.courses.map((c) => (
               <div key={c.name}>
-                <p className="font-display text-gold-400 text-[14.5px] leading-tight">
+                <p className="font-display text-gold-400 text-[15px] sm:text-[16px] leading-tight">
                   <span className="text-gold-500 mr-1">·</span>
                   {c.name}
                 </p>
-                <p className="font-serif italic text-[12.5px] text-cream-100/80 leading-snug mt-1">
+                <p className="font-serif italic text-[13px] text-cream-100/80 leading-snug mt-1">
                   {c.blurb}
                 </p>
               </div>
@@ -82,25 +108,25 @@ export default function NavyEventPanel({ event }) {
         </div>
       </div>
 
-      {/* ── 3. Footer row (pinned to bottom) ────────────────────────── */}
-      <div className="relative grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] gap-4">
-        {/* Prize */}
-        <div className="bg-navy-900 border border-gold-500/40 p-4 sm:p-5 text-center rounded-md">
-          <p className="font-display text-gold-400 text-[10.5px] tracking-[0.28em] uppercase">
-            {event.prizeInFocus.headline}:
+      {/* ── C) FOOTER — asymmetric 2-col (1.65fr / 1fr) ──────────────── */}
+      <div className="relative grid grid-cols-1 sm:grid-cols-[1.65fr_1fr] gap-3 mt-auto">
+        {/* Prize — wider, navy bg, gold hairline */}
+        <div className="bg-navy-900 border border-gold-500/40 px-4 py-3.5 sm:px-5 sm:py-4 text-center rounded-md flex flex-col justify-center">
+          <p className="font-display text-gold-400 text-[10px] sm:text-[10.5px] tracking-[0.26em] uppercase">
+            {event.prizeInFocus.headline}
           </p>
-          <p className="mt-2 font-serif italic text-cream-50 text-[14px] sm:text-[14.5px] leading-snug text-balance">
-            {event.prizeInFocus.title}
+          <p className="mt-1.5 font-serif italic text-cream-50 text-[14px] leading-snug text-balance">
+            {event.prizeInFocus.title}.
           </p>
         </div>
 
-        {/* 19th Hole */}
-        <div className="bg-gold-500 text-navy-900 p-4 sm:p-5 text-center rounded-md">
-          <p className="font-display text-navy-900 text-[10.5px] tracking-[0.28em] uppercase">
-            {event.nineteenthHole.headline}:
+        {/* 19th Hole — narrower, solid gold, navy type */}
+        <div className="bg-gold-500 text-navy-900 px-4 py-3.5 sm:px-5 sm:py-4 text-center rounded-md flex flex-col justify-center">
+          <p className="font-display text-navy-900 text-[10px] sm:text-[10.5px] tracking-[0.26em] uppercase">
+            {event.nineteenthHole.headline}
           </p>
-          <p className="mt-2 font-serif italic text-navy-900 text-[14px] sm:text-[14.5px] leading-snug font-semibold text-balance">
-            {event.nineteenthHole.title}
+          <p className="mt-1.5 font-serif italic text-navy-900 text-[14px] leading-snug font-semibold text-balance">
+            {event.nineteenthHole.title}.
           </p>
         </div>
       </div>

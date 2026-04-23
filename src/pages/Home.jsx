@@ -35,7 +35,7 @@ export default function Home() {
         center sits exactly on the hero's bottom edge (half in hero, half in cream
         section below). The hero image/overlays are clipped by their own container.
       */}
-      <section className="relative min-h-[calc(100svh-3.5rem)] sm:min-h-[calc(100svh-4rem)] lg:min-h-[calc(100svh-72px)] flex flex-col justify-center bg-navy-900">
+      <section className="relative min-h-[calc(100svh-3.5rem)] sm:min-h-[calc(100svh-4rem)] lg:min-h-[calc(100svh-60px)] xl:min-h-[calc(100svh-64px)] flex flex-col justify-center bg-navy-900">
         {/* Photo — clipped in its own overflow-hidden container */}
         <div className="absolute inset-0 overflow-hidden">
           <img
@@ -169,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* ========== 2026 CALENDAR ========== */}
-      <section id="calendar" className="bg-cream-100 py-16 sm:py-24 scroll-mt-[72px]">
+      <section id="calendar" className="bg-cream-100 py-16 sm:py-24 scroll-mt-[64px]">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
           <SectionReveal>
             <div className="text-center mb-12 sm:mb-14">
@@ -184,7 +184,7 @@ export default function Home() {
           </SectionReveal>
 
           <SectionReveal delay={100}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7 lg:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7 items-stretch">
               <NavyEventPanel event={coastalClassic} />
               <CalendarEventCard />
             </div>
@@ -222,7 +222,14 @@ export default function Home() {
                 From the Archive
               </p>
               <h2 className="mt-2 font-display text-navy-900 text-4xl sm:text-5xl lg:text-[56px] leading-tight">
-                Past Events (2025)
+                Past Events (
+                <CountUp
+                  from={2020}
+                  to={2025}
+                  duration={2000}
+                  format={(n) => Math.round(n).toString()}
+                />
+                )
               </h2>
               <div className="mt-4 flex justify-center"><span className="gold-rule" /></div>
               <p className="mt-5 max-w-2xl mx-auto font-serif italic text-ink-500 text-[15px] sm:text-[17px] leading-relaxed">
@@ -262,7 +269,8 @@ export default function Home() {
             src="https://images.unsplash.com/photo-1761141987987-54c0bc930655?auto=format&fit=crop&w=2000&q=80"
             alt="Misty morning on the fairway"
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: 'center 75%' }}
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
           />
           <div className="absolute inset-0 bg-navy-900/70" />

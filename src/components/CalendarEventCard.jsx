@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { useTilt } from '../hooks/useTilt';
 import { haptic } from '../lib/haptics';
 import { kwekweGolfDay, contact } from '../data/siteData';
+import CountUp from './CountUp';
 
 // The Kwekwe Golf Day card — white bg, course photo left, form right.
 export default function CalendarEventCard() {
@@ -59,23 +60,29 @@ export default function CalendarEventCard() {
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative bg-white text-ink-900 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.10)] border border-cream-300 rounded-lg overflow-hidden h-full min-h-[640px] grid grid-rows-[auto_1fr_auto]"
+      className="relative bg-white text-ink-900 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.10)] border border-cream-300 rounded-lg overflow-hidden h-full flex flex-col"
     >
       {/* Head */}
-      <div className="text-center px-7 sm:px-8 lg:px-10 pt-7 sm:pt-8 lg:pt-10">
+      <div className="text-center px-6 sm:px-7 lg:px-9 pt-6 sm:pt-7 lg:pt-9">
         <p className="font-display text-gold-700 text-[12.5px] tracking-[0.3em] uppercase">
           {event.shortName.toUpperCase()}
         </p>
         <h3 className="mt-3 font-display text-[22px] sm:text-[26px] lg:text-[28px] leading-tight text-navy-900">
-          {event.dateLabel} <span className="text-gold-600">|</span> {event.location.toUpperCase()}
+          <CountUp
+            from={2020}
+            to={2026}
+            duration={2000}
+            format={(n) => `JULY ${Math.round(n)}`}
+          />{' '}
+          <span className="text-gold-600">|</span> {event.location.toUpperCase()}
         </h3>
         <div className="mt-3 flex items-center justify-center">
           <span className="gold-rule" />
         </div>
       </div>
 
-      {/* Body: photo (flex-grows to fill 1fr row) */}
-      <div className="relative min-h-[220px] overflow-hidden">
+      {/* Body: photo (flex-grows to absorb slack between cards) */}
+      <div className="relative min-h-[220px] overflow-hidden flex-1">
         <img
           src={event.cardPhoto}
           alt="Kwekwe Golf Club parkland fairway"
@@ -86,8 +93,8 @@ export default function CalendarEventCard() {
         <div className="absolute inset-0 bg-gradient-to-t from-navy-900/40 via-transparent to-transparent" />
       </div>
 
-      {/* Footer form (pinned to bottom) */}
-      <div className="px-7 sm:px-8 lg:px-10 py-7 sm:py-8 lg:py-10 border-t border-cream-200">
+      {/* Footer form (pinned to bottom via mt-auto on wrapper flex) */}
+      <div className="px-6 sm:px-7 lg:px-9 py-6 sm:py-7 lg:py-9 border-t border-cream-200 mt-auto">
         <form onSubmit={submit} id="register" className="space-y-4">
           <div>
             <p className="text-[10.5px] tracking-[0.25em] uppercase text-gold-700 font-display mb-2">

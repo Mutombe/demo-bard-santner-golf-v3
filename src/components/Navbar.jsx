@@ -71,7 +71,7 @@ export default function Navbar({ onOpenSearch }) {
   return (
     <>
       <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-cream-300">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-5 lg:px-10 h-14 sm:h-16 lg:h-[72px] flex items-center justify-between gap-3">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-5 lg:px-10 h-14 sm:h-16 lg:h-[60px] xl:h-[64px] flex items-center justify-between gap-3">
           {/* Logo — nudge up 1px to optically center against the nav links */}
           <Link
             to="/"
@@ -81,7 +81,7 @@ export default function Navbar({ onOpenSearch }) {
             <img
               src={business.logo}
               alt={business.parent}
-              className="h-9 sm:h-10 lg:h-11 w-auto shrink-0"
+              className="h-8 sm:h-9 lg:h-10 xl:h-10 w-auto shrink-0"
               loading="eager"
               onError={(e) => { e.currentTarget.style.display = 'none'; }}
             />
@@ -95,14 +95,14 @@ export default function Navbar({ onOpenSearch }) {
             </div>
           </Link>
 
-          {/* Desktop nav — translate-y-px to bring link baselines toward the
-              logo's optical center (logo has a bit of visual weight low). */}
+          {/* Desktop nav — translate-y-px brings link baselines into optical
+              alignment with the logo's centre-of-mass. */}
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9 translate-y-px">
             <NavLink
               to="/"
               end
               className={({ isActive }) =>
-                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative py-1.5 ${
+                `text-[11.5px] tracking-[0.18em] uppercase font-medium transition-colors relative py-1 ${
                   isActive ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
                 }`
               }
@@ -124,7 +124,7 @@ export default function Navbar({ onOpenSearch }) {
             >
               <button
                 onClick={() => { setDropdownOpen(v => !v); haptic(6); }}
-                className={`flex items-center gap-1.5 text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors py-1.5 ${
+                className={`flex items-center gap-1.5 text-[11.5px] tracking-[0.18em] uppercase font-medium transition-colors py-1 ${
                   onCalendar ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
                 }`}
                 aria-haspopup="menu"
@@ -164,7 +164,7 @@ export default function Navbar({ onOpenSearch }) {
             <NavLink
               to="/past-events"
               className={({ isActive }) =>
-                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative py-1.5 ${
+                `text-[11.5px] tracking-[0.18em] uppercase font-medium transition-colors relative py-1 ${
                   isActive ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
                 }`
               }
@@ -179,7 +179,7 @@ export default function Navbar({ onOpenSearch }) {
             <NavLink
               to="/contact"
               className={({ isActive }) =>
-                `text-[12.5px] tracking-[0.18em] uppercase font-medium transition-colors relative py-1.5 ${
+                `text-[11.5px] tracking-[0.18em] uppercase font-medium transition-colors relative py-1 ${
                   isActive ? 'text-navy-900' : 'text-ink-600 hover:text-navy-900'
                 }`
               }

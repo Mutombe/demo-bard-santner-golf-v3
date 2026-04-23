@@ -9,6 +9,7 @@ import {
 } from '@phosphor-icons/react';
 import { business, contact } from '../data/siteData';
 import { haptic } from '../lib/haptics';
+import CountUp from './CountUp';
 
 export default function Footer() {
   return (
@@ -89,7 +90,16 @@ export default function Footer() {
         <div className="pt-6 border-t border-navy-700/70 flex flex-col md:flex-row items-center justify-between gap-5 text-[12px] text-cream-200/70">
           <div className="flex items-center gap-2">
             <GlobeHemisphereWest size={16} weight="regular" className="text-gold-500" />
-            <span>© 2026, bardsantnergolf.com</span>
+            <span>
+              ©{' '}
+              <CountUp
+                from={2024}
+                to={2026}
+                duration={1600}
+                format={(n) => Math.round(n).toString()}
+              />
+              , bardsantnergolf.com
+            </span>
           </div>
 
           <div className="flex items-center gap-5">
