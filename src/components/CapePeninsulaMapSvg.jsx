@@ -14,7 +14,7 @@ import React from 'react';
  *   Bottom    ≈ Cape Point
  *   Right     ≈ Stellenbosch / Helderberg
  */
-export default function CapePeninsulaMapSvg({ className = '' }) {
+export default function CapePeninsulaMapSvg({ className = '', bare = false }) {
   const DOTS = [
     // Ordered I–IV as played during the Coastal Classic week.
     { roman: 'I', x: 132, y: 118, label: 'King David Mowbray' },  // NW, city-side
@@ -23,15 +23,17 @@ export default function CapePeninsulaMapSvg({ className = '' }) {
     { roman: 'IV', x: 146, y: 142, label: 'Rondebosch' },          // just NE of Mowbray
   ];
 
-  return (
-    <div className={`gold-frame bg-cream-50 ${className}`}>
-      <svg
-        viewBox="0 0 300 360"
-        xmlns="http://www.w3.org/2000/svg"
-        className="block w-full h-auto rounded-md"
-        role="img"
-        aria-label="Stylised map of the Cape Peninsula showing the four Coastal Classic courses"
-      >
+  // When `bare`, render just the SVG so a parent can own the framing
+  // (used by the homepage NavyEventPanel which wraps with its own tight
+  // gold-frame). Otherwise, wrap in the full cream-50 gold-frame card.
+  const Svg = (
+    <svg
+      viewBox="0 0 300 360"
+      xmlns="http://www.w3.org/2000/svg"
+      className="block w-full h-auto rounded-md"
+      role="img"
+      aria-label="Stylised map of the Cape Peninsula showing the four Coastal Classic courses"
+    >
         {/* Cream/ivory canvas */}
         <rect width="300" height="360" fill="#FBF8F1" />
 
@@ -50,10 +52,10 @@ export default function CapePeninsulaMapSvg({ className = '' }) {
           x="40"
           y="50"
           fontFamily="'Playfair Display', Georgia, serif"
-          fontSize="8"
+          fontSize="7"
           fill="#8A6D2D"
-          letterSpacing="3"
-          opacity="0.8"
+          letterSpacing="2"
+          opacity="0.75"
         >
           ATLANTIC
         </text>
@@ -63,10 +65,10 @@ export default function CapePeninsulaMapSvg({ className = '' }) {
           x="180"
           y="300"
           fontFamily="'Playfair Display', Georgia, serif"
-          fontSize="8"
+          fontSize="7"
           fill="#8A6D2D"
-          letterSpacing="3"
-          opacity="0.8"
+          letterSpacing="2"
+          opacity="0.75"
         >
           FALSE BAY
         </text>
@@ -178,31 +180,36 @@ export default function CapePeninsulaMapSvg({ className = '' }) {
         {DOTS.map((d) => (
           <g key={d.roman}>
             {/* Soft glow behind each dot */}
-            <circle cx={d.x} cy={d.y} r="8" fill="#C7A352" opacity="0.18" />
+            <circle cx={d.x} cy={d.y} r="7" fill="#C7A352" opacity="0.18" />
             {/* Main dot */}
             <circle
               cx={d.x}
               cy={d.y}
-              r="4.5"
+              r="4"
               fill="#C7A352"
               stroke="#FBF8F1"
-              strokeWidth="1.2"
+              strokeWidth="1.1"
             />
             {/* Roman numeral, just to the right of the dot */}
             <text
               x={d.x + 8}
               y={d.y + 3}
               fontFamily="'Playfair Display', Georgia, serif"
-              fontSize="9"
+              fontSize="8"
               fontWeight="700"
               fill="#0F1A2B"
-              letterSpacing="0.4"
+              letterSpacing="0.3"
             >
               {d.roman}
             </text>
           </g>
         ))}
-      </svg>
-    </div>
+    </svg>
   );
+
+  if (bare) {
+    return <div className={className}>{Svg}</div>;
+  }
+
+  return <div className={`gold-frame bg-cream-50 ${className}`}>{Svg}</div>;
 }
