@@ -25,9 +25,9 @@ export const business = {
 
 export const hero = {
   image:
-    'https://images.unsplash.com/photo-1592919505780-303950717480?w=2000&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1766584006994-be9d51c13543?auto=format&fit=crop&w=2000&q=80',
   fallback:
-    'https://images.unsplash.com/photo-1587381420270-3e1a5b9e6904?w=2000&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1730372645289-a1b54da81e98?auto=format&fit=crop&w=2000&q=80',
   kicker: '2026 Season',
   headlineLines: [
     'ELEVATING THE GAME:',
@@ -52,7 +52,7 @@ export const coastalClassic = {
   location: 'Cape Town',
   locationLong: 'Cape Town, South Africa',
   heroImage:
-    'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=2000&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1672825952732-ecef34882416?auto=format&fit=crop&w=2000&q=80',
   intro:
     'A week of championship golf, vineyard nights, and quiet celebration along the Cape coast. Four of the peninsula\'s most storied courses, hosted by invitation only — a week reserved for those whose game, and whose company, set the standard.',
   courses: [
@@ -114,9 +114,9 @@ export const kwekweGolfDay = {
   location: 'Midlands, Zimbabwe',
   locationLong: 'Kwekwe Golf Club, Midlands, Zimbabwe',
   heroImage:
-    'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=2000&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1672871583054-fd20d2cbe5bb?auto=format&fit=crop&w=2000&q=80',
   cardPhoto:
-    'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1672871583054-fd20d2cbe5bb?auto=format&fit=crop&w=1600&q=80',
   intro:
     'A day that brings the game home. Kwekwe\'s parkland course hosts the Bard Santner Golf Day — an open-field celebration for individuals and corporate four-balls alike. Fewer trophies, more community; a proper Midlands Saturday well spent.',
   formats: ['INDIVIDUAL', 'CORPORATE FOUR-BALL'],
@@ -144,7 +144,7 @@ export const pastEvents = [
     title: 'The Road to SA Golf Challenge 2025 Highlights',
     date: 'January–October 2025',
     image:
-      'https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=1600&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1775326424702-4eca92f63cef?auto=format&fit=crop&w=1600&q=80',
     excerpt:
       'Nine rounds. One season. The inaugural Road to South Africa drew Zimbabwe\'s finest amateur field to Royal Harare for a year-long points race culminating in the Nedbank Challenge trip.',
   },
@@ -154,7 +154,7 @@ export const pastEvents = [
     title: 'The Gold Golf: Winners to Investec SA Open',
     date: 'March 2025',
     image:
-      'https://images.unsplash.com/photo-1566024287286-457247b70310?w=1600&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1632244115549-a751ab16b915?auto=format&fit=crop&w=1600&q=80',
     excerpt:
       'A one-day showcase at Royal Harare that sent two low-handicap winners to Johannesburg for the Investec South African Open — with stay, tee times and Friday round included.',
   },
@@ -164,7 +164,7 @@ export const pastEvents = [
     title: 'Wall of Fame: Winners to Investec SA Open & Nedbank Challenge',
     date: 'October 2025',
     image:
-      'https://images.unsplash.com/photo-1545972154-9bb223aac798?w=1600&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1766206096924-c78074981e84?auto=format&fit=crop&w=1600&q=80',
     excerpt:
       'The season finale unveiled the Wall of Fame — a permanent ledger of winners at Royal Harare\'s Clubhouse, now carrying five names bound for the 2026 majors on our tab.',
   },
@@ -174,7 +174,7 @@ export const pastEvents = [
     title: 'The Winter Series — Three-Round Stableford',
     date: 'June–August 2025',
     image:
-      'https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1672871583167-bedd74c24995?auto=format&fit=crop&w=1600&q=80',
     excerpt:
       'Short days, firm fairways, and Royal Harare at its most honest. The Winter Series ran three Saturdays of Stableford with a club-champion crowned on count-back in August.',
   },
@@ -184,7 +184,7 @@ export const pastEvents = [
     title: 'The Ladies\' Day at Royal Harare',
     date: 'May 2025',
     image:
-      'https://images.unsplash.com/photo-1565992441121-4367c2967103?w=1600&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1775326420892-a233ed95ec58?auto=format&fit=crop&w=1600&q=80',
     excerpt:
       'A sold-out field of 72 under a cloudless Harare sky. Mixed-greensome format, bespoke trophies, and a long-table lunch on the Clubhouse lawn.',
   },
@@ -194,7 +194,7 @@ export const pastEvents = [
     title: 'The Corporate Shield 2025',
     date: 'September 2025',
     image:
-      'https://images.unsplash.com/photo-1530023367847-a683933f4172?w=1600&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1757874905852-ea4596dd221a?auto=format&fit=crop&w=1600&q=80',
     excerpt:
       'Fifteen corporate four-balls competed for the inaugural Bard Santner Shield — now an annual fixture on Royal Harare\'s calendar.',
   },

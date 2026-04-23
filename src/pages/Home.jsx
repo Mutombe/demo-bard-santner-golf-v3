@@ -259,8 +259,8 @@ export default function Home() {
       <section className="relative py-20 sm:py-28 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=2000&q=80&auto=format&fit=crop"
-            alt="Clubhouse at sundown"
+            src="https://images.unsplash.com/photo-1761141987987-54c0bc930655?auto=format&fit=crop&w=2000&q=80"
+            alt="Misty morning on the fairway"
             loading="lazy"
             className="absolute inset-0 w-full h-full object-cover object-center"
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
