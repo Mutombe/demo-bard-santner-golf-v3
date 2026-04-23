@@ -29,9 +29,15 @@ export default function Home() {
       />
 
       {/* ========== HERO ========== */}
-      <section className="relative min-h-[calc(100svh-5rem)] flex flex-col justify-center overflow-hidden bg-navy-900">
-        {/* Photo */}
-        <div className="absolute inset-0">
+      {/*
+        Hero has NO overflow-hidden at the section level — the twin event cards
+        are positioned absolutely at bottom:0 and translateY(50%) so their vertical
+        center sits exactly on the hero's bottom edge (half in hero, half in cream
+        section below). The hero image/overlays are clipped by their own container.
+      */}
+      <section className="relative min-h-[calc(100svh-5rem)] flex flex-col justify-center bg-navy-900">
+        {/* Photo — clipped in its own overflow-hidden container */}
+        <div className="absolute inset-0 overflow-hidden">
           <img
             src={hero.image}
             alt="Cape Town coastal golf"
@@ -53,7 +59,7 @@ export default function Home() {
         </div>
 
         {/* Copy */}
-        <div className="relative max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-12 pt-16 sm:pt-20 pb-48 sm:pb-56 lg:pb-64">
+        <div className="relative max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-12 pt-16 sm:pt-20 pb-[320px] sm:pb-[340px] md:pb-44 lg:pb-48">
           <SectionReveal>
             <p className="font-serif italic text-gold-300 text-sm sm:text-base tracking-[0.2em] uppercase mb-4">
               {hero.kicker}
@@ -97,21 +103,17 @@ export default function Home() {
             </div>
           </SectionReveal>
         </div>
-      </section>
 
-      {/* ========== TWIN FRAMED EVENT CARDS (float on hero/cream seam) ========== */}
-      {/*
-        The cards sit visually *on* the border line between the hero image and
-        the cream section below — their vertical center aligns with the seam,
-        so half the card lives in the hero and half in the cream block.
-
-        Desktop (md+): cards are side-by-side; card is ~240px tall → pull up ~120px.
-        Mobile:        cards stack; stack is ~500–560px tall → pull up ~260px so
-                       the stack's vertical center straddles the seam.
-      */}
-      <section className="relative bg-cream-100">
-        <div className="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12 -mt-[260px] sm:-mt-[280px] md:-mt-[120px] lg:-mt-[130px] relative z-20">
-          <SectionReveal>
+        {/*
+          TWIN FRAMED EVENT CARDS — absolutely positioned at hero's bottom edge
+          with translateY(50%) so their vertical center sits EXACTLY on the seam
+          between the hero and the cream section. Works regardless of card height.
+        */}
+        <div
+          className="absolute left-0 right-0 bottom-0 z-20"
+          style={{ transform: 'translateY(50%)' }}
+        >
+          <div className="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-7">
               <GoldFrameCard title={coastalClassic.name}>
                 <Link
@@ -133,12 +135,20 @@ export default function Home() {
                 </Link>
               </GoldFrameCard>
             </div>
-          </SectionReveal>
+          </div>
         </div>
       </section>
 
       {/* ========== PROSE LEAD ========== */}
-      <section className="bg-cream-100 pt-16 sm:pt-20">
+      {/*
+        The cards above are absolute-positioned and out of layout flow; the top
+        half of each card extends INTO this cream section visually. We reserve
+        space for that half-card via generous padding-top so the prose below
+        starts below the card bottoms, not behind them.
+        Mobile stacked cards are tall (~560px total, half = 280px); desktop
+        side-by-side cards are ~260px tall (half = 130px).
+      */}
+      <section className="bg-cream-100 pt-[320px] sm:pt-[340px] md:pt-[180px] lg:pt-[190px]">
         <div className="max-w-3xl mx-auto px-5 sm:px-8 text-center">
           <SectionReveal>
             <p className="font-serif italic text-gold-700 text-sm tracking-[0.22em] uppercase">
