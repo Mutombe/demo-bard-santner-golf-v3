@@ -1,12 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowUpRight } from '@phosphor-icons/react';
 import { useTilt } from '../hooks/useTilt';
-import CapeCourseMap from './CapeCourseMap';
-import { haptic } from '../lib/haptics';
+import CapePeninsulaMapSvg from './CapePeninsulaMapSvg';
 
-// The Coastal Classic 2026 card — deep navy, gold type, SVG map,
-// 4 courses, prize in focus, 19th hole.
+// The Coastal Classic 2026 homepage card — deep navy, gold type,
+// lightweight SVG peninsula map (Leaflet stays on the detail page),
+// 2x2 course grid, prize + 19th-hole footer.
+//
+// Layout matches the client mockup:
+//   1. Single-line gold Playfair header  "COASTAL CLASSIC 2026 | SEPT 13–19, 2026 | CAPE TOWN"
+//   2. Thin gold hairline rule
+//   3. Body: SVG map on the left, 2x2 course grid on the right
+//   4. Footer row: prize (wider) + 19th hole (narrower)
+//   5. NO CTA button inside this card — action lives on the twin framed cards above.
 export default function NavyEventPanel({ event }) {
   const { ref, style, onMouseMove, onMouseLeave } = useTilt(2);
 
@@ -16,38 +21,55 @@ export default function NavyEventPanel({ event }) {
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative bg-navy-800 text-cream-50 p-7 sm:p-8 lg:p-10 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)] rounded-lg overflow-hidden"
+      className="relative bg-navy-800 text-cream-50 p-6 sm:p-7 lg:p-8 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)] rounded-lg overflow-hidden"
     >
       <div className="grain opacity-40" />
 
-      {/* Head */}
-      <div className="text-center">
-        <p className="font-display text-gold-400 text-[12.5px] tracking-[0.3em] uppercase">
-          {event.shortName.toUpperCase()}
-        </p>
-        <h3 className="mt-3 font-display text-[22px] sm:text-[26px] lg:text-[28px] leading-tight text-cream-50">
-          {event.dateLabel} <span className="text-gold-400">|</span> {event.location.toUpperCase()}
+      {/* ── 1. Single-line gold header ─────────────────────────────── */}
+      <div className="relative text-center">
+        <h3
+          className="font-display text-gold-400 tracking-[0.12em] leading-tight text-balance"
+          style={{ fontSize: 'clamp(0.95rem, 2.1vw, 1.35rem)' }}
+        >
+          <span className="whitespace-nowrap">
+            {event.shortName.toUpperCase()}
+          </span>
+          <span className="mx-2 sm:mx-3 text-gold-500">|</span>
+          <span className="whitespace-nowrap">{event.dateLabel}</span>
+          <span className="mx-2 sm:mx-3 text-gold-500">|</span>
+          <span className="whitespace-nowrap">{event.location.toUpperCase()}</span>
         </h3>
-        <div className="mt-3 flex items-center justify-center">
-          <span className="gold-rule" />
+
+        {/* ── 2. Thin gold hairline rule under header ──────────────── */}
+        <div className="mt-3 sm:mt-4 flex justify-center">
+          <span
+            aria-hidden
+            className="block h-px bg-gold-500/70"
+            style={{ width: '60%' }}
+          />
         </div>
       </div>
 
-      {/* Body: map left, courses right */}
-      <div className="mt-7 grid grid-cols-1 md:grid-cols-[140px_1fr] gap-5 sm:gap-6">
+      {/* ── 3. Body: 2-column — SVG map | 2x2 course grid ──────────── */}
+      <div className="relative mt-6 sm:mt-7 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-start">
+        {/* Left: SVG peninsula map (lightweight, editorial) */}
         <div className="flex items-start justify-center md:justify-start">
-          <CapeCourseMap className="w-32 sm:w-36 md:w-full h-auto" />
+          <CapePeninsulaMapSvg className="w-full max-w-[260px]" />
         </div>
 
+        {/* Right: 2x2 course grid */}
         <div>
-          <p className="text-[10.5px] tracking-[0.25em] uppercase text-gold-400 font-display mb-3">
+          <p className="text-[10.5px] tracking-[0.25em] uppercase text-gold-400 font-display mb-4">
             Secure Your Spot:
           </p>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-3.5">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-4">
             {event.courses.map((c) => (
               <div key={c.name}>
-                <p className="font-display text-gold-400 text-[14.5px] leading-tight">{c.name}</p>
-                <p className="font-serif text-[12.5px] text-cream-100/80 leading-snug mt-0.5 italic">
+                <p className="font-display text-gold-400 text-[14.5px] leading-tight">
+                  <span className="text-gold-500 mr-1">·</span>
+                  {c.name}
+                </p>
+                <p className="font-serif italic text-[12.5px] text-cream-100/80 leading-snug mt-1">
                   {c.blurb}
                 </p>
               </div>
@@ -56,37 +78,30 @@ export default function NavyEventPanel({ event }) {
         </div>
       </div>
 
-      {/* Footer row: prize + 19th hole side by side */}
-      <div className="mt-7 grid grid-cols-1 sm:grid-cols-[1.35fr_1fr] gap-4">
-        <div className="bg-navy-900/60 border border-gold-500/40 p-4 text-center rounded-md">
-          <p className="font-display text-gold-400 text-[11px] tracking-[0.28em] uppercase">
+      {/* ── 4. Footer row: Prize (wider) + 19th Hole (narrower) ─────── */}
+      <div className="relative mt-6 sm:mt-7 grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] gap-4">
+        {/* Prize in focus — darker navy card with gold hairline */}
+        <div className="bg-navy-900 border border-gold-500/40 p-4 sm:p-5 text-center rounded-md">
+          <p className="font-display text-gold-400 text-[10.5px] tracking-[0.28em] uppercase">
             {event.prizeInFocus.headline}:
           </p>
-          <p className="mt-2 font-serif italic text-cream-50 text-[14.5px] leading-snug">
+          <p className="mt-2 font-serif italic text-cream-50 text-[14px] sm:text-[14.5px] leading-snug text-balance">
             {event.prizeInFocus.title}
           </p>
         </div>
-        <div className="bg-gold-500 text-navy-900 p-4 text-center rounded-md">
-          <p className="font-display text-navy-900 text-[11px] tracking-[0.28em] uppercase">
+
+        {/* 19th Hole — solid gold card */}
+        <div className="bg-gold-500 text-navy-900 p-4 sm:p-5 text-center rounded-md">
+          <p className="font-display text-navy-900 text-[10.5px] tracking-[0.28em] uppercase">
             {event.nineteenthHole.headline}:
           </p>
-          <p className="mt-2 font-serif italic text-navy-900 text-[14.5px] leading-snug font-semibold">
+          <p className="mt-2 font-serif italic text-navy-900 text-[14px] sm:text-[14.5px] leading-snug font-semibold text-balance">
             {event.nineteenthHole.title}
           </p>
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="mt-7 text-center">
-        <Link
-          to={event.ctaTo}
-          onClick={() => haptic(10)}
-          className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
-        >
-          {event.ctaLabel}
-          <ArrowUpRight size={14} weight="bold" />
-        </Link>
-      </div>
+      {/* ── 5. No CTA button — matches mockup. ──────────────────────── */}
     </div>
   );
 }
