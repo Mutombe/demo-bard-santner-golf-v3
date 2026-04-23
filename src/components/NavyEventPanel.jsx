@@ -28,7 +28,7 @@ export default function NavyEventPanel({ event }) {
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="relative bg-navy-800 text-cream-50 p-5 sm:p-6 lg:p-7 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)] rounded-lg overflow-hidden h-full flex flex-col"
+      className="relative bg-navy-800 text-cream-50 p-5 sm:p-6 lg:p-7 transition-transform duration-500 will-change-transform shadow-[0_14px_48px_rgba(15,20,32,0.22)] rounded-lg overflow-hidden flex flex-col"
     >
       <div className="grain opacity-40 pointer-events-none absolute inset-0" />
 
