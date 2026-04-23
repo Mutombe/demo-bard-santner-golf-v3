@@ -184,7 +184,12 @@ export default function Home() {
           </SectionReveal>
 
           <SectionReveal delay={100}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7 items-stretch">
+            {/*
+              Cards are allowed to be their own height on desktop — no forced symmetry.
+              `items-start` so each card sizes to its own content and we don't leave
+              empty vertical space stretching one of them to match the taller sibling.
+            */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7 items-start">
               <NavyEventPanel event={coastalClassic} />
               <CalendarEventCard />
             </div>

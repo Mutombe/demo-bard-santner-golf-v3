@@ -33,7 +33,7 @@ export default function NavyEventPanel({ event }) {
       {/* ── A) HEADER — one centred line, pipe separators ───────────── */}
       <header className="relative text-center">
         <h3
-          className="font-display text-gold-400 tracking-[0.1em] leading-tight text-balance"
+          className="font-display text-gold-400 tracking-[0.1em] leading-tight flex flex-col md:flex-row items-center justify-center gap-y-1 md:gap-y-0"
           style={{ fontSize: 'clamp(1rem, 2vw, 1.4rem)' }}
         >
           <span className="whitespace-nowrap">
@@ -45,7 +45,7 @@ export default function NavyEventPanel({ event }) {
               format={(n) => Math.round(n).toString()}
             />
           </span>
-          <span className="mx-2 sm:mx-3 text-gold-500">|</span>
+          <span className="hidden md:inline mx-2 lg:mx-3 text-gold-500">|</span>
           <span className="whitespace-nowrap">
             SEPT{' '}
             <CountUp from={1} to={13} duration={1700} format={(n) => Math.round(n).toString()} />
@@ -59,7 +59,7 @@ export default function NavyEventPanel({ event }) {
             />
             , 2026
           </span>
-          <span className="mx-2 sm:mx-3 text-gold-500">|</span>
+          <span className="hidden md:inline mx-2 lg:mx-3 text-gold-500">|</span>
           <span className="whitespace-nowrap">
             {(event.location || 'CAPE TOWN').toUpperCase()}
           </span>
