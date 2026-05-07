@@ -51,8 +51,7 @@ export const coastalClassic = {
   endISO: '2026-09-19',
   location: 'Cape Town',
   locationLong: 'Cape Town, South Africa',
-  heroImage:
-    'https://images.unsplash.com/photo-1672825952732-ecef34882416?auto=format&fit=crop&w=2000&q=80',
+  heroImage: '/images/venues/clovelly/hero.jpeg',
   intro:
     'A week of championship golf, vineyard nights, and quiet celebration along the Cape coast. Four of the peninsula\'s most storied courses, hosted by invitation only — a week reserved for those whose game, and whose company, set the standard.',
   courses: [
@@ -113,10 +112,8 @@ export const kwekweGolfDay = {
   dateISO: '2026-07-25',
   location: 'Midlands, Zimbabwe',
   locationLong: 'Kwekwe Golf Club, Midlands, Zimbabwe',
-  heroImage:
-    'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=2000&q=80&auto=format&fit=crop',
-  cardPhoto:
-    'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1600&q=80&auto=format&fit=crop',
+  heroImage: '/images/hero-9th-fairway.jpg',
+  cardPhoto: '/images/hero-9th-fairway.jpg',
   intro:
     'A day that brings the game home. Kwekwe\'s parkland course hosts the Bard Santner Golf Day — an open-field celebration for individuals and corporate four-balls alike. Fewer trophies, more community; a proper Midlands Saturday well spent.',
   formats: ['INDIVIDUAL', 'CORPORATE FOUR-BALL'],

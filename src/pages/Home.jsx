@@ -90,21 +90,17 @@ export default function Home() {
         </div>
 
         {/*
-          2026 CALENDAR CARDS — NavyEventPanel (Coastal Classic) +
-          CalendarEventCard (Kwekwe with registration form).
-
-          Hung at the hero's bottom edge with translateY(80%) — only the top
-          ~20% of each card sits on the hero, the remaining ~80% drops into
-          the cream section below. items-stretch + h-full on both cards
-          forces equal heights, with the registration form determining the
-          common height.
+          2026 CALENDAR CARDS (md+ only) — hung at hero's bottom edge with
+          translateY(80%); ~20% sits on the hero, ~80% drops into the cream
+          section below. items-stretch + h-full on both cards forces equal
+          heights. Mobile is handled separately below in normal flow.
         */}
         <div
-          className="absolute left-0 right-0 bottom-0 z-20"
+          className="hidden md:block absolute left-0 right-0 bottom-0 z-20"
           style={{ transform: 'translateY(80%)' }}
         >
           <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-7 items-stretch">
+            <div className="grid md:grid-cols-2 gap-6 lg:gap-7 items-stretch">
               <div className="h-full [&>*]:h-full">
                 <NavyEventPanel event={coastalClassic} />
               </div>
@@ -114,16 +110,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ========== CREAM LANDING SECTION ==========
-          The hero's calendar cards (NavyEventPanel + CalendarEventCard)
-          translate by 80% into this cream block. Top padding reserves
-          enough vertical space that any subsequent content begins below
-          the card bottoms. No heading or duplicated content here — the
-          cards themselves are the calendar landing.
+      {/* ========== CALENDAR CARDS (mobile only) ==========
+          Tall cards stacked on a phone are too long to absolute-overhang
+          cleanly. On mobile we render them in normal flow with breathing
+          room above and below.
+      */}
+      <section className="md:hidden bg-cream-100 px-5 pt-10 pb-12">
+        <div className="grid grid-cols-1 gap-6 items-stretch">
+          <div className="h-full [&>*]:h-full">
+            <NavyEventPanel event={coastalClassic} />
+          </div>
+          <CalendarEventCard />
+        </div>
+      </section>
+
+      {/* ========== CREAM LANDING SECTION (md+ only) ==========
+          On md+ the absolute overhang above translates ~80% into this block;
+          top padding reserves vertical room for the card bottoms. Bottom
+          padding gives breathing space before Past Events. Hidden on mobile
+          since the mobile section above handles spacing in normal flow.
       */}
       <section
         id="calendar"
-        className="bg-cream-100 pt-[640px] sm:pt-[680px] md:pt-[600px] lg:pt-[620px] pb-4 scroll-mt-[64px]"
+        className="hidden md:block bg-cream-100 md:pt-[600px] lg:pt-[620px] pb-12 scroll-mt-[64px]"
       />
 
       {/* ========== PAST EVENTS 2025 ========== */}

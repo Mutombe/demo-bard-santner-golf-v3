@@ -25,6 +25,8 @@ export default function CalendarEventCard() {
           className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
+        {/* White-fade — dissolves the photo into the cream text block below */}
+        <div className="absolute inset-x-0 bottom-0 h-2/3 pointer-events-none bg-gradient-to-b from-transparent via-cream-50/60 to-cream-50" />
       </div>
 
       <div className="flex flex-col px-7 sm:px-9 lg:px-10 pt-6 sm:pt-7 pb-7 sm:pb-8 lg:pb-9">
