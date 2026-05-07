@@ -186,30 +186,46 @@ function RegistrationForm() {
     setSending(true);
 
     const endpoint = import.meta.env.VITE_REGISTER_ENDPOINT || '/api/register';
+    // Map camelCase form ids → snake_case backend schema. The Django
+    // serializer is strict about field names; mismatches return 400.
     const payload = {
       event: 'kwekwe-golf-day-2026',
-      submittedAt: new Date().toISOString(),
-      ...values,
+      full_name: values.fullName || '',
+      email: values.email || '',
+      phone: values.phone || '',
+      company: values.company || '',
+      handicap: values.handicap || '',
+      home_club: values.homeClub || '',
+      caddy: values.caddy || '',
+      heard_about: values.heard || '',
+      prize_giving: values.prizeGiving || '',
+      dietary_requirements: values.dietary || '',
     };
 
-    try {
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+    // Optimistic confirmation — show the thank-you immediately. The free-tier
+    // backend can cold-start for ~30s; the guest shouldn't be made to wait.
+    // The POST runs in the background; we surface only catastrophic failures.
+    setSubmitted(true);
+    setSending(false);
+    window.scrollTo({ top: window.scrollY, behavior: 'smooth' });
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`Server responded ${res.status}`);
+      })
+      .catch((err) => {
+        console.error('Registration submission failed in background:', err);
+        toast.error(
+          'A network hiccup may have prevented your registration from being recorded. Our team will reach out — or please email concierge directly.',
+          { duration: 8000 }
+        );
       });
-      if (!res.ok) {
-        throw new Error(`Server responded ${res.status}`);
-      }
-      setSubmitted(true);
-      // Scroll the thank-you into view — replaces the form in place
-      window.scrollTo({ top: window.scrollY, behavior: 'smooth' });
-    } catch (err) {
-      console.error('Registration submission failed:', err);
-      toast.error('We could not submit your registration just now. Please try again, or email concierge directly.');
-    } finally {
-      setSending(false);
-    }
+    return;
   };
 
   if (submitted) {
