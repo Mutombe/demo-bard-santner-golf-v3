@@ -29,18 +29,28 @@ export default function CalendarEventCard() {
     }
     setSubmitting(true);
 
-    // TODO: Wire to Django backend POST /api/kwekwe-register/
     try {
+      const endpoint = import.meta.env.VITE_REGISTER_ENDPOINT || '/api/register/';
       const ctrl = new AbortController();
-      const timeout = setTimeout(() => ctrl.abort(), 2000);
-      await fetch('/api/kwekwe-register/', {
+      const timeout = setTimeout(() => ctrl.abort(), 8000);
+      // Map this card's lighter form into the backend's payload schema
+      const payload = {
+        full_name: form.name,
+        email: form.email,
+        phone: form.phone || '',
+        company: form.company || '',
+        handicap: form.handicap || '',
+        tee_preference: form.format || '',
+      };
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
         signal: ctrl.signal,
       });
       clearTimeout(timeout);
-      toast.success('Registration received — check your email for confirmation.');
+      if (!res.ok) throw new Error('non-2xx');
+      toast.success('Thank you — a member of our team will be in touch shortly.');
     } catch {
       // Fallback: email prefill
       const subject = encodeURIComponent('Kwekwe Golf Day 2026 — Registration');

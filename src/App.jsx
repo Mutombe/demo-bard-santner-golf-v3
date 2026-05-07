@@ -13,6 +13,7 @@ import SearchModal from './components/SearchModal';
 import Home from './pages/Home';
 import CoastalClassic from './pages/CoastalClassic';
 import KwekweGolfDay from './pages/KwekweGolfDay';
+import KwekweRegister from './pages/KwekweRegister';
 import PastEvents from './pages/PastEvents';
 import PastEventDetail from './pages/PastEventDetail';
 import Sponsorship from './pages/Sponsorship';
@@ -58,6 +59,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/coastal-classic" element={<CoastalClassic />} />
               <Route path="/kwekwe-golf-day" element={<KwekweGolfDay />} />
+              <Route path="/kwekwe-golf-day/register" element={<KwekweRegister />} />
               <Route path="/past-events" element={<PastEvents />} />
               <Route path="/past-events/:slug" element={<PastEventDetail />} />
               <Route path="/sponsorship" element={<Sponsorship />} />
