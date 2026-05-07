@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from '@phosphor-icons/react';
 
 import SEO from '../components/SEO';
 import PageTransition from '../components/PageTransition';
 import SectionReveal from '../components/SectionReveal';
-import GoldFrameCard from '../components/GoldFrameCard';
 import NavyEventPanel from '../components/NavyEventPanel';
 import CalendarEventCard from '../components/CalendarEventCard';
 import PastEventCard from '../components/PastEventCard';
 import CountUp from '../components/CountUp';
+import Lightbox from '../components/Lightbox';
 import {
   hero,
   coastalClassic,
-  kwekweGolfDay,
   pastEvents,
-  stats,
-  business,
 } from '../data/siteData';
 import { haptic } from '../lib/haptics';
 
 export default function Home() {
+  // Page-scoped lightbox — gallery thumbnails on this page open inside it.
+  const [lb, setLb] = useState({ open: false, images: [], index: 0 });
+  const openLB = useCallback((images, index = 0) => setLb({ open: true, images, index }), []);
+  const closeLB = useCallback(() => setLb((s) => ({ ...s, open: false })), []);
+  const setIndex = useCallback((i) => setLb((s) => ({ ...s, index: i })), []);
+
   return (
+    <>
     <PageTransition>
       <SEO
         title="Bard Santner Golf — Elevating the Game: 2026 Season"
-        description="Two iconic events, one uncommon standard. Coastal Classic (Sept 13–19, 2026, Cape Town) and Kwekwe Golf Day (July 2026)."
+        description="Two iconic events, one uncommon standard. Coastal Classic (Sept 13–19, 2026, Cape Town) and Kwekwe Golf Day (June 26, 2026)."
       />
 
       {/* ========== HERO ========== */}
@@ -83,137 +87,69 @@ export default function Home() {
               {hero.subheadline}
             </p>
           </SectionReveal>
-          <SectionReveal delay={300}>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href="#calendar"
-                onClick={() => haptic(10)}
-                className="press-physics brass-glint inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
-              >
-                View the 2026 Calendar
-                <ArrowUpRight size={14} weight="bold" />
-              </a>
-              <Link
-                to="/newsletter"
-                onClick={() => haptic(8)}
-                className="press-physics inline-flex items-center gap-2 px-6 py-3 border border-cream-50/70 text-cream-50 hover:bg-cream-50 hover:text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
-              >
-                Newsletter Signup
-              </Link>
-            </div>
-          </SectionReveal>
         </div>
 
         {/*
-          TWIN FRAMED EVENT CARDS — absolutely positioned at hero's bottom edge
-          with translateY(50%) so their vertical center sits EXACTLY on the seam
-          between the hero and the cream section. Works regardless of card height.
+          TWIN EVENT PANELS — full NavyEventPanel + CalendarEventCard, hung at
+          the hero's bottom edge.
+
+          Desktop (md+): absolute-positioned at bottom:0 with translateY(50%)
+          so the cards' vertical center lands ON the hero/cream seam — the
+          tops overlap the hero, the bottoms extend deep into the cream
+          section below. The cream section reserves enough top padding so its
+          heading begins below the card bottoms.
+
+          Mobile (<md): the cards are MUCH too tall to translate by half their
+          height (the Kwekwe registration form alone runs ~700px). On mobile
+          we drop the absolute positioning entirely — the cards become normal
+          flow content sitting at the top of the cream section, cleanly
+          stacked. No overhang, no cropping, no math gymnastics.
         */}
         <div
-          className="absolute left-0 right-0 bottom-0 z-20"
+          className="hidden md:block absolute left-0 right-0 bottom-0 z-20"
           style={{ transform: 'translateY(50%)' }}
         >
-          <div className="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-7">
-              <GoldFrameCard title={coastalClassic.name} tone="glass">
-                <Link
-                  to={coastalClassic.ctaTo}
-                  onClick={() => haptic(10)}
-                  className="press-physics brass-glint inline-flex items-center justify-center w-full gap-2 px-5 py-3 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11px] sm:text-[11.5px] tracking-[0.18em] uppercase font-medium rounded-md transition-colors"
-                >
-                  {coastalClassic.ctaLabel}
-                </Link>
-              </GoldFrameCard>
-
-              <GoldFrameCard title={kwekweGolfDay.name}>
-                <Link
-                  to={kwekweGolfDay.ctaTo}
-                  onClick={() => haptic(10)}
-                  className="press-physics brass-glint inline-flex items-center justify-center w-full gap-2 px-5 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11px] sm:text-[11.5px] tracking-[0.18em] uppercase font-medium rounded-md transition-colors"
-                >
-                  {kwekweGolfDay.ctaLabel}
-                </Link>
-              </GoldFrameCard>
+          <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-7 items-start">
+              <NavyEventPanel event={coastalClassic} />
+              <CalendarEventCard />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ========== PROSE LEAD ========== */}
-      {/*
-        The cards above are absolute-positioned and out of layout flow; the top
-        half of each card extends INTO this cream section visually. We reserve
-        space for that half-card via generous padding-top so the prose below
-        starts below the card bottoms, not behind them.
-        Mobile stacked cards are tall (~560px total, half = 280px); desktop
-        side-by-side cards are ~260px tall (half = 130px).
+      {/* ========== 2026 CALENDAR · OVERHANG LANDING + PAST-EVENTS ENTRY ==========
+          The two event panels above (NavyEventPanel + CalendarEventCard) are
+          absolute-positioned on md+ and translateY(50%) — meaning roughly half
+          of each panel's vertical extent lives in this cream block. Top padding
+          reserves space so any subsequent content begins below the panel bottoms.
+
+          On mobile (<md) the panels become normal flow content rendered HERE
+          (not as overhang) — see fallback markup below.
       */}
-      <section className="bg-cream-100 pt-[320px] sm:pt-[340px] md:pt-[180px] lg:pt-[190px]">
-        <div className="max-w-3xl mx-auto px-5 sm:px-8 text-center">
-          <SectionReveal>
-            <p className="font-serif italic text-gold-700 text-sm tracking-[0.22em] uppercase">
-              The 2026 Season
-            </p>
-            <div className="mt-3 flex justify-center"><span className="gold-rule" /></div>
-            <p className="mt-6 font-display text-navy-900 text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.35] text-balance">
-              Two weeks of the year, we stop. Twice —{' '}
-              <Link to="/coastal-classic" className="prose-link">once along the Cape coast</Link>{' '}
-              and{' '}
-              <Link to="/kwekwe-golf-day" className="prose-link">once in the Midlands</Link>{' '}
-              — {business.name.split(' ')[0]}&nbsp;{business.name.split(' ')[1]} hosts the rooms our
-              clients spend the rest of the year chasing appointments in. The golf is incidental.
-              The company is the point.
-            </p>
-          </SectionReveal>
-        </div>
-      </section>
-
-      {/* ========== 2026 CALENDAR ========== */}
-      <section id="calendar" className="bg-cream-100 py-16 sm:py-24 scroll-mt-[64px]">
+      <section
+        id="calendar"
+        className="bg-cream-100 pt-12 md:pt-[340px] lg:pt-[360px] pb-8 sm:pb-12 md:pb-16 scroll-mt-[64px]"
+      >
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-          <SectionReveal>
-            <div className="text-center mb-12 sm:mb-14">
-              <p className="font-serif italic text-gold-700 text-sm tracking-[0.22em] uppercase">
-                The Year Ahead
-              </p>
-              <h2 className="mt-2 font-display text-navy-900 text-4xl sm:text-5xl lg:text-[56px] leading-tight">
-                2026 Calendar
-              </h2>
-              <div className="mt-4 flex justify-center"><span className="gold-rule" /></div>
-            </div>
-          </SectionReveal>
-
-          <SectionReveal delay={100}>
-            {/*
-              Cards are allowed to be their own height on desktop — no forced symmetry.
-              `items-start` so each card sizes to its own content and we don't leave
-              empty vertical space stretching one of them to match the taller sibling.
-            */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7 items-start">
+          {/* Mobile-only: render the two panels here in normal flow.
+              On md+ they're rendered as the absolute overhang above. */}
+          <div className="md:hidden">
+            <SectionReveal>
+              <div className="text-center mb-10">
+                <p className="font-serif italic text-gold-700 text-sm tracking-[0.22em] uppercase">
+                  The Year Ahead
+                </p>
+                <h2 className="mt-2 font-display text-navy-900 text-4xl leading-tight">
+                  2026 Calendar
+                </h2>
+                <div className="mt-4 flex justify-center"><span className="gold-rule" /></div>
+              </div>
+            </SectionReveal>
+            <div className="grid grid-cols-1 gap-6">
               <NavyEventPanel event={coastalClassic} />
               <CalendarEventCard />
             </div>
-          </SectionReveal>
-        </div>
-      </section>
-
-      {/* ========== STATS RIBBON ========== */}
-      <section className="bg-navy-800 text-cream-50 py-14 sm:py-16 relative overflow-hidden">
-        <div className="grain opacity-50" />
-        <div className="relative max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((s) => (
-              <SectionReveal key={s.label} className="text-center">
-                <CountUp
-                  to={s.value}
-                  suffix={s.suffix}
-                  className="engraved-numeral block text-5xl sm:text-6xl"
-                />
-                <p className="mt-2 text-[11px] tracking-[0.3em] uppercase text-cream-200/80 font-display">
-                  {s.label}
-                </p>
-              </SectionReveal>
-            ))}
           </div>
         </div>
       </section>
@@ -246,8 +182,9 @@ export default function Home() {
           </SectionReveal>
 
           <SectionReveal delay={100}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-              {pastEvents.slice(0, 6).map((e) => (
+            {/* 4-up on desktop, all cards in a single row, equal height */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
+              {pastEvents.slice(0, 4).map((e) => (
                 <PastEventCard key={e.slug} event={e} />
               ))}
             </div>
@@ -312,5 +249,13 @@ export default function Home() {
         </div>
       </section>
     </PageTransition>
+    <Lightbox
+      open={lb.open}
+      images={lb.images}
+      index={lb.index}
+      onClose={closeLB}
+      onIndex={setIndex}
+    />
+    </>
   );
 }
