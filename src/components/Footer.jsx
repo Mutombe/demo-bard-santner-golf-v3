@@ -10,14 +10,19 @@ import {
 import { business, contact } from '../data/siteData';
 import { haptic } from '../lib/haptics';
 import CountUp from './CountUp';
+import BrandPattern from './BrandPattern';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-navy-900 text-cream-100 mt-0">
-      <div className="grain" />
+    <footer className="relative bg-navy-900 text-cream-100 mt-0 overflow-hidden">
+      {/* BrandPattern — diamond/cross weave behind everything; non-interactive */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <BrandPattern variant="navy" className="h-full" />
+      </div>
+      <div className="grain relative" />
 
       {/* Gold thread */}
-      <div className="h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-60" />
+      <div className="relative h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-60" />
 
       <div className="relative max-w-[1400px] mx-auto px-5 lg:px-10 py-14 sm:py-16">
         {/* Upper panel: brand + pillars + offices */}
