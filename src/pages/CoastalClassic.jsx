@@ -132,6 +132,36 @@ export default function CoastalClassic() {
           }}
         />
 
+        {/* Bottom fade — map dissolves into the cream section that follows */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-20 sm:h-28 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(0deg, rgba(250,247,240,0.95) 0%, rgba(250,247,240,0.45) 55%, rgba(250,247,240,0) 100%)',
+          }}
+        />
+
+        {/* Left fade — soft seam against the page edge */}
+        <div
+          aria-hidden
+          className="absolute inset-y-0 left-0 w-12 sm:w-20 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(90deg, rgba(250,247,240,0.6) 0%, rgba(250,247,240,0) 100%)',
+          }}
+        />
+
+        {/* Right fade — soft seam against the page edge */}
+        <div
+          aria-hidden
+          className="absolute inset-y-0 right-0 w-12 sm:w-20 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(270deg, rgba(250,247,240,0.6) 0%, rgba(250,247,240,0) 100%)',
+          }}
+        />
+
         {/* Floating title pill — top-left, glassmorphism, doesn't block tiles */}
         <div className="absolute top-5 left-5 sm:top-8 sm:left-8 lg:top-10 lg:left-10 max-w-[88vw] sm:max-w-md pointer-events-none">
           <div className="bg-navy-900/72 backdrop-blur-md border border-gold-500/30 rounded-lg px-5 py-4 sm:px-6 sm:py-5 pointer-events-auto">
@@ -327,40 +357,51 @@ function VenueAerialOverlay({ venue }) {
 function PeterFalkeInterlude({ venue }) {
   if (!venue) return null;
   return (
-    <section id={venue.slug} className="relative bg-cream-50 text-navy-900 overflow-hidden scroll-mt-20">
-      <div className="relative max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12 py-24 sm:py-32">
+    <section id={venue.slug} className="bg-cream-50 py-20 sm:py-28 scroll-mt-20">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
         <SectionReveal>
-          <div className="text-center mb-12">
-            <p className="font-serif italic text-gold-700 text-sm tracking-[0.3em] uppercase mb-3 inline-flex items-center gap-2">
-              <Wine size={14} weight="duotone" /> The 19th Hole · Wine excursion
-            </p>
-            <h2 className="font-display text-navy-900 text-4xl sm:text-6xl leading-[1.04] max-w-3xl mx-auto">
-              The week pauses at <span className="font-serif italic text-gold-700">{venue.short}</span>.
-            </h2>
-            <p className="mt-5 font-serif italic text-ink-700 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
-              {venue.intro}
-            </p>
-          </div>
-        </SectionReveal>
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+            {/* Image left */}
+            <div className="lg:col-span-7 relative">
+              <div className="relative aspect-[4/3] lg:aspect-[16/11] overflow-hidden rounded-lg">
+                <ClickableImage
+                  src={venue.hero}
+                  alt={`${venue.name} — Stellenbosch wine excursion`}
+                  gallery={venue.gallery}
+                  index={0}
+                />
+              </div>
+              {/* "19TH" overlay — same shape as Round I's Roman numeral overlay */}
+              <div className="absolute -bottom-6 -left-2 sm:-left-6 bg-cream-50 pl-4 pr-6 py-3 flex items-center gap-4">
+                <img src={venue.logo} alt={`${venue.name} logo`} loading="lazy" className="h-12 w-12 object-contain" />
+                <div>
+                  <p className="font-serif italic text-gold-700 text-[10px] tracking-[0.3em] uppercase">The</p>
+                  <p className="font-display text-navy-900 text-3xl">19th</p>
+                </div>
+              </div>
+            </div>
 
-        <SectionReveal>
-          {/* Multi-column vertical scrolling marquee — three columns of Peter Falke
-              imagery, each auto-scrolling at a different speed/direction. Top + bottom
-              fade out so the strip reads as a flowing river of photographs.
-              Uses every supplied Peter Falke image. */}
-          <PeterFalkeMarquee gallery={venue.gallery} />
-        </SectionReveal>
-
-        <SectionReveal>
-          <div className="mt-12 max-w-3xl mx-auto bg-navy-900 border border-gold-500/40 rounded-lg p-6 sm:p-8">
-            <div className="flex items-center gap-5">
-              <img src={venue.logo} alt="Peter Falke logo" loading="lazy" className="h-12 w-12 object-contain shrink-0" />
-              <div>
-                <p className="font-serif italic text-gold-400 text-[11px] tracking-[0.3em] uppercase mb-1">
-                  The 19th Hole
+            {/* Copy right */}
+            <div className="lg:col-span-5">
+              <p className="font-serif italic text-gold-700 text-[12px] tracking-[0.3em] uppercase mb-3 inline-flex items-center gap-2">
+                <Wine size={12} weight="duotone" /> The 19th Hole · {venue.subtitle || 'Wine Excursion · Stellenbosch'}
+              </p>
+              <h2 className="font-display text-navy-900 text-4xl sm:text-5xl leading-[1.05] mb-5">
+                {venue.name}
+              </h2>
+              <p className="font-serif italic text-ink-700 text-lg leading-relaxed mb-5">
+                {venue.intro}
+              </p>
+              <p className="text-ink-700 text-[15px] leading-relaxed mb-7">
+                The considered counterweight to the championship week — a Stellenbosch afternoon spent among the vines and the cellars, hosted by the Falke family. Tasting flights, a long lunch under the oaks, and a slow walk through the harvest blocks. No scorecards. No pressure. Just the week's quiet centre.
+              </p>
+              {/* Compact accent — replaces SpecRow / SignatureCallout (no data) */}
+              <div className="border-l-2 border-gold-500/60 pl-5 py-1">
+                <p className="font-serif italic text-gold-700 text-[10.5px] tracking-[0.3em] uppercase mb-1">
+                  Day Five
                 </p>
-                <p className="font-display text-cream-50 text-lg leading-tight">
-                  Peter Falke Vineyard Excursion
+                <p className="font-display text-navy-900 text-base leading-snug">
+                  Vineyard Excursion · Tasting & Long Lunch
                 </p>
               </div>
             </div>

@@ -112,8 +112,10 @@ export const kwekweGolfDay = {
   dateISO: '2026-07-25',
   location: 'Midlands, Zimbabwe',
   locationLong: 'Kwekwe Golf Club, Midlands, Zimbabwe',
-  heroImage: '/images/hero-9th-fairway.jpg',
-  cardPhoto: '/images/hero-9th-fairway.jpg',
+  heroImage:
+    'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=2000&q=80&auto=format&fit=crop',
+  cardPhoto:
+    'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1600&q=80&auto=format&fit=crop',
   intro:
     'A day that brings the game home. Kwekwe\'s parkland course hosts the Bard Santner Golf Day — an open-field celebration for individuals and corporate four-balls alike. Fewer trophies, more community; a proper Midlands Saturday well spent.',
   formats: ['INDIVIDUAL', 'CORPORATE FOUR-BALL'],
