@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from '@phosphor-icons/react';
 import { useTilt } from '../hooks/useTilt';
+import { haptic } from '../lib/haptics';
 import CapePeninsulaMapSvg from './CapePeninsulaMapSvg';
 
 // The Coastal Classic 2026 homepage card — a tight editorial composition
@@ -112,6 +115,18 @@ export default function NavyEventPanel({ event }) {
             {event.nineteenthHole.title}.
           </p>
         </div>
+      </div>
+
+      {/* ── D) CTA — single button, mt-auto pushes it to the bottom for equal-height alignment ── */}
+      <div className="mt-auto pt-5 lg:pt-6">
+        <Link
+          to={event.ctaTo || '/coastal-classic'}
+          onClick={() => haptic(10)}
+          className="press-physics brass-glint w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11.5px] tracking-[0.22em] uppercase font-medium rounded-md transition-colors"
+        >
+          {event.ctaLabel || 'Inside the Coastal Classic'}
+          <ArrowUpRight size={14} weight="bold" />
+        </Link>
       </div>
     </div>
   );
