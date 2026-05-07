@@ -5,7 +5,6 @@ import { ArrowUpRight } from '@phosphor-icons/react';
 import SEO from '../components/SEO';
 import PageTransition from '../components/PageTransition';
 import SectionReveal from '../components/SectionReveal';
-import GoldFrameCard from '../components/GoldFrameCard';
 import NavyEventPanel from '../components/NavyEventPanel';
 import CalendarEventCard from '../components/CalendarEventCard';
 import PastEventCard from '../components/PastEventCard';
@@ -14,7 +13,6 @@ import Lightbox from '../components/Lightbox';
 import {
   hero,
   coastalClassic,
-  kwekweGolfDay,
   pastEvents,
 } from '../data/siteData';
 import { haptic } from '../lib/haptics';
@@ -92,78 +90,41 @@ export default function Home() {
         </div>
 
         {/*
-          TWIN GOLD-FRAMED EVENT CARDS — Coastal Classic + Kwekwe Golf Day.
-          Equal heights, glass tone on the left (Coastal) so the hero image
-          breathes through, white tone on the right (Kwekwe). Each card has a
-          single CTA button that routes to its dedicated page.
+          2026 CALENDAR CARDS — NavyEventPanel (Coastal Classic) +
+          CalendarEventCard (Kwekwe with registration form).
 
-          Hung at the hero's bottom edge with translateY(80%) — only ~20% of
-          each card sits on the hero, ~80% drops into the cream section
-          below. The cream section reserves matching top padding so the
-          calendar heading begins below the card bottoms.
+          Hung at the hero's bottom edge with translateY(80%) — only the top
+          ~20% of each card sits on the hero, the remaining ~80% drops into
+          the cream section below. items-stretch + h-full on both cards
+          forces equal heights, with the registration form determining the
+          common height.
         */}
         <div
           className="absolute left-0 right-0 bottom-0 z-20"
           style={{ transform: 'translateY(80%)' }}
         >
-          <div className="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-7 items-stretch">
-              <GoldFrameCard title={coastalClassic.name} tone="glass">
-                <Link
-                  to={coastalClassic.ctaTo}
-                  onClick={() => haptic(10)}
-                  className="press-physics brass-glint inline-flex items-center justify-center w-full gap-2 px-5 py-3 bg-navy-800 hover:bg-navy-900 text-cream-50 text-[11px] sm:text-[11.5px] tracking-[0.18em] uppercase font-medium rounded-md transition-colors"
-                >
-                  {coastalClassic.ctaLabel}
-                </Link>
-              </GoldFrameCard>
-
-              <GoldFrameCard title={kwekweGolfDay.name}>
-                <Link
-                  to={kwekweGolfDay.ctaTo}
-                  onClick={() => haptic(10)}
-                  className="press-physics brass-glint inline-flex items-center justify-center w-full gap-2 px-5 py-3 bg-gold-500 hover:bg-gold-400 text-navy-900 text-[11px] sm:text-[11.5px] tracking-[0.18em] uppercase font-medium rounded-md transition-colors"
-                >
-                  {kwekweGolfDay.ctaLabel}
-                </Link>
-              </GoldFrameCard>
+          <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-7 items-stretch">
+              <div className="h-full [&>*]:h-full">
+                <NavyEventPanel event={coastalClassic} />
+              </div>
+              <CalendarEventCard />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ========== 2026 CALENDAR ==========
-          The hero's two GoldFrameCards are absolute-positioned at translateY(80%)
-          — ~80% of each card hangs into this cream section. Top padding reserves
-          space so the calendar heading begins below the card bottoms.
+      {/* ========== CREAM LANDING SECTION ==========
+          The hero's calendar cards (NavyEventPanel + CalendarEventCard)
+          translate by 80% into this cream block. Top padding reserves
+          enough vertical space that any subsequent content begins below
+          the card bottoms. No heading or duplicated content here — the
+          cards themselves are the calendar landing.
       */}
       <section
         id="calendar"
-        className="bg-cream-100 pt-[260px] sm:pt-[280px] md:pt-[300px] lg:pt-[320px] pb-16 sm:pb-24 scroll-mt-[64px]"
-      >
-        <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-          <SectionReveal>
-            <div className="text-center mb-12 sm:mb-14">
-              <p className="font-serif italic text-gold-700 text-sm tracking-[0.22em] uppercase">
-                The Year Ahead
-              </p>
-              <h2 className="mt-2 font-display text-navy-900 text-4xl sm:text-5xl lg:text-[56px] leading-tight">
-                2026 Calendar
-              </h2>
-              <div className="mt-4 flex justify-center"><span className="gold-rule" /></div>
-            </div>
-          </SectionReveal>
-
-          <SectionReveal delay={100}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7 items-start">
-              <div className="lg:sticky lg:top-24 lg:self-start">
-                <NavyEventPanel event={coastalClassic} />
-              </div>
-              <CalendarEventCard />
-            </div>
-          </SectionReveal>
-        </div>
-      </section>
+        className="bg-cream-100 pt-[640px] sm:pt-[680px] md:pt-[600px] lg:pt-[620px] pb-4 scroll-mt-[64px]"
+      />
 
       {/* ========== PAST EVENTS 2025 ========== */}
       <section className="bg-cream-100 py-16 sm:py-24">
